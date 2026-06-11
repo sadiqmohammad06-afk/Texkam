@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TexKam - Panipat ka Apna Network</title>
+  <link rel="stylesheet" href="./style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div id="desktop-simulator">
+    <div id="app">
+      
+      <!-- TOP HEADER -->
+      <header id="main-header" style="position: sticky; top: 0; z-index: 20; display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: var(--white); border-bottom: 1px solid var(--gray-border);">
+        <div class="header-left" style="display: flex; align-items: center; gap: 8px; flex: 1;">
+          <button id="menu-btn" aria-label="Open Menu" class="menu-btn-round" style="width: 44px; height: 44px; border-radius: 50%; background: transparent; color: var(--navy); display: flex; align-items: center; justify-content: center; border: none; cursor: pointer;">
+             <i data-lucide="menu" style="width: 24px; height: 24px; stroke-width: 2.5;"></i>
+          </button>
+          <div class="logo-area" style="display: flex; flex-direction: column; line-height: 1.1;">
+            <h1 class="logo-text" style="font-size: 26px; font-weight: 800; letter-spacing: -0.5px; margin: 0;"><span class="text-navy">TEX</span><span class="text-primary">KAM</span></h1>
+            <p class="logo-sub" style="font-size: 11px; color: var(--gray-text); margin: 2px 0 0 0; font-weight: 500;">Panipat ka Apna Network</p>
+            <p class="loc-pin" style="font-size: 11px; font-weight: 700; color: #087a3b; margin: 2px 0 0 0; display: flex; align-items: center; gap: 3px;"><i data-lucide="map-pin" style="width:10px;height:10px; stroke-width: 3;"></i> Panipat</p>
+          </div>
+        </div>
+        <div class="header-right" style="display: flex; align-items: center; gap: 8px;">
+          <div class="bell-icon" style="background:#fffcf0; padding:8px; border-radius:50%; position:relative; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="app.switchView('blogs')">
+            <i data-lucide="bell" style="fill: #fcd34d; color: #d97706; width:22px; height:22px;"></i>
+            <span class="badge" style="position:absolute; top:-2px; right:-2px; background:#ef4444; color:white; font-size:10px; font-weight:800; border-radius:10px; width:18px; height:18px; display:flex; align-items:center; justify-content:center; border:2px solid white;">3</span>
+          </div>
+          <button id="login-header-btn" onclick="app.openModal('login-modal')" style="background: var(--primary); color: white; padding: 6px 14px; border-radius: 9999px; font-size: 13px; font-weight: 700; border: none; cursor: pointer; height: 32px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; white-space: nowrap;">Login</button>
+        </div>
+      </header>
+
+      <!-- SIDEBAR -->
+      <div id="sidebar-overlay" onclick="app.closeSidebar()"></div>
+      <aside id="sidebar">
+        <div class="sidebar-user" onclick="app.switchView('profile'); app.closeSidebar()" style="background:transparent; margin:0; padding:24px 20px 16px; display:flex; align-items:center; border-bottom: 1px solid #e2e8f0; border-radius:0;">
+          <div class="sb-avatar" style="width:64px; height:64px; border-radius:50%; background:#e0f2fe; color:#0ea5e9; display:flex; align-items:center; justify-content:center; margin-right:16px;">
+             <i data-lucide="user" style="width:32px; height:32px;"></i>
+          </div>
+          <div class="sb-user-info" style="flex:1;">
+            <h4 id="sidebar-user-name" style="font-size:22px; font-weight:800; color:var(--navy); margin-bottom:2px;">Guest User</h4>
+            <p id="sidebar-user-phone" style="font-size:14px; color:#64748b; font-weight:500; margin-bottom:4px;">Not Logged In</p>
+            <p style="font-size:15px; color:var(--navy); font-weight:800;">View My Profile</p>
+          </div>
+        </div>
+        
+        <div style="padding: 16px;">
+          <button class="w-full flex justify-center items-center gap-2" style="border-radius:12px; padding: 14px; background:var(--primary); border:none; color:white; font-size:16px; font-weight:700;" onclick="app.closeSidebar()">
+            <i data-lucide="check-square" style="fill:white; stroke:var(--primary); width:20px;height:20px;"></i> TEXKAM Verified Network
+          </button>
+        </div>
+
+        <nav class="sidebar-nav" style="padding: 0 16px 20px; gap: 4px;">
+          <button onclick="app.switchView('groups'); app.closeSidebar()" style="padding:12px 0; background:transparent; display:flex; align-items:center; width:100%; text-align:left; border:none; cursor:pointer;">
+            <div style="width:44px; height:44px; border-radius:50%; background:#f1f5f9; display:flex; align-items:center; justify-content:center; margin-right:16px; flex-shrink:0;">
+              <i data-lucide="users" style="color:#0ea5e9; width:22px; height:22px; stroke-width:2.5;"></i>
+            </div>
+            <div style="flex:1;"><b style="font-size:17px; color:var(--navy); font-weight:800;">Groups</b></div>
+          </button>
+          
+          <button onclick="app.switchView('community'); app.closeSidebar()" style="padding:12px 0; background:transparent; display:flex; align-items:center; width:100%; text-align:left; border:none; cursor:pointer;">
+            <div style="width:44px; height:44px; border-radius:50%; background:#f1f5f9; display:flex; align-items:center; justify-content:center; margin-right:16px; flex-shrink:0;">
+              <i data-lucide="edit" style="color:#f59e0b; width:22px; height:22px; stroke-width:2.5;"></i>
+            </div>
+            <div style="flex:1; line-height:1.2;">
+              <b style="font-size:17px; color:var(--navy); font-weight:800;">Posts / Community</b>
+              <div style="font-size:14px; color:var(--navy); font-weight:800;">&amp; Discussions</div>
+            </div>
+          </button>
+          
+          <button onclick="app.switchView('blogs'); app.closeSidebar()" style="padding:12px 0; background:transparent; display:flex; align-items:center; width:100%; text-align:left; border:none; cursor:pointer;">
+            <div style="width:44px; height:44px; border-radius:50%; background:#f1f5f9; display:flex; align-items:center; justify-content:center; margin-right:16px; flex-shrink:0;">
+              <i data-lucide="newspaper" style="color:#94a3b8; width:22px; height:22px; stroke-width:2.5;"></i>
+            </div>
+            <div style="flex:1;"><b style="font-size:17px; color:var(--navy); font-weight:800;">Blogs &amp; News</b></div>
+          </button>
+          
+          <button onclick="app.switchView('market'); app.closeSidebar()" style="padding:12px 0; background:transparent; display:flex; align-items:center; width:100%; text-align:left; border:none; cursor:pointer;">
+            <div style="width:44px; height:44px; border-radius:50%; background:#f1f5f9; display:flex; align-items:center; justify-content:center; margin-right:16px; flex-shrink:0;">
+              <i data-lucide="shopping-cart" style="color:#64748b; width:22px; height:22px; stroke-width:2.5;"></i>
+            </div>
+            <div style="flex:1;"><b style="font-size:17px; color:var(--navy); font-weight:800;">Market Wall</b></div>
+          </button>
+          
+          <button onclick="app.switchView('boutique'); app.closeSidebar()" style="padding:12px 0; background:transparent; display:flex; align-items:center; width:100%; text-align:left; border:none; cursor:pointer;">
+            <div style="width:44px; height:44px; border-radius:50%; background:#f1f5f9; display:flex; align-items:center; justify-content:center; margin-right:16px; flex-shrink:0;">
+              <i data-lucide="shirt" style="color:#3b82f6; width:22px; height:22px; stroke-width:2.5; fill:#bfdbfe;"></i>
+            </div>
+            <div style="flex:1;"><b style="font-size:17px; color:var(--navy); font-weight:800;">Boutique Gallery</b></div>
+          </button>
+          
+          <button onclick="app.switchView('jobs'); app.closeSidebar()" style="padding:12px 0; background:transparent; display:flex; align-items:center; width:100%; text-align:left; border:none; cursor:pointer;">
+            <div style="width:44px; height:44px; border-radius:50%; background:#f1f5f9; display:flex; align-items:center; justify-content:center; margin-right:16px; flex-shrink:0;">
+              <i data-lucide="star" style="color:#eab308; width:22px; height:22px; stroke-width:2.5; fill:#fef08a;"></i>
+            </div>
+            <div style="flex:1;"><b style="font-size:17px; color:var(--navy); font-weight:800;">Saved Jobs</b></div>
+          </button>
+          
+          <button onclick="app.switchView('profile'); app.closeSidebar()" style="padding:12px 0; background:transparent; display:flex; align-items:center; width:100%; text-align:left; border:none; cursor:pointer;">
+            <div style="width:44px; height:44px; border-radius:50%; background:#f1f5f9; display:flex; align-items:center; justify-content:center; margin-right:16px; flex-shrink:0;">
+              <i data-lucide="check-square" style="color:#22c55e; width:22px; height:22px; stroke-width:2.5; fill:#bbf7d0;"></i>
+            </div>
+            <div style="flex:1;"><b style="font-size:17px; color:var(--navy); font-weight:800;">Verification</b></div>
+          </button>
+          
+          <button onclick="app.closeSidebar()" style="padding:12px 0; background:transparent; display:flex; align-items:center; width:100%; text-align:left; border:none; cursor:pointer;">
+            <div style="width:44px; height:44px; border-radius:50%; background:#f1f5f9; display:flex; align-items:center; justify-content:center; margin-right:16px; flex-shrink:0;">
+              <i data-lucide="help-circle" style="color:#8b5cf6; width:22px; height:22px; stroke-width:2.5;"></i>
+            </div>
+            <div style="flex:1;"><b style="font-size:17px; color:var(--navy); font-weight:800;">Help &amp; Support</b></div>
+          </button>
+          
+          <button onclick="app.closeSidebar()" style="padding:12px 0; background:transparent; display:flex; align-items:center; width:100%; text-align:left; border:none; cursor:pointer;">
+            <div style="width:44px; height:44px; border-radius:50%; background:#f1f5f9; display:flex; align-items:center; justify-content:center; margin-right:16px; flex-shrink:0;">
+              <i data-lucide="settings" style="color:#64748b; width:22px; height:22px; stroke-width:2.5;"></i>
+            </div>
+            <div style="flex:1;"><b style="font-size:17px; color:var(--navy); font-weight:800;">Settings</b></div>
+          </button>
+
+          <button onclick="app.closeSidebar()" style="padding:12px 0; background:transparent; display:flex; align-items:center; width:100%; text-align:left; border:none; cursor:pointer;">
+            <div style="width:44px; height:44px; border-radius:50%; background:#fee2e2; display:flex; align-items:center; justify-content:center; margin-right:16px; flex-shrink:0;">
+              <i data-lucide="log-out" style="color:#ef4444; width:22px; height:22px; stroke-width:2.5;"></i>
+            </div>
+            <div style="flex:1;"><b style="font-size:17px; color:#ef4444; font-weight:800;">Logout</b></div>
+          </button>
+        </nav>
+      </aside>
+
+      <!-- MAIN SCROLLABLE CONTENT -->
+      <main id="main-content">
+        
+        <!-- HOME VIEW -->
+        <section id="view-home" class="view active">
+          
+          <!-- Search Area -->
+          <!-- Search Area -->
+          <div class="search-section" style="padding: 16px 16px 12px 16px;">
+            <div class="search-bar" onclick="app.openModal('ai-modal')" style="border: 2px solid #087a3b; border-radius: 20px; padding: 10px 14px; box-shadow: none; display: flex; align-items: center; gap: 12px; background: white; cursor: pointer;">
+              <div class="search-icon-bg" style="width: 44px; height: 44px; border-radius: 50%; background: #e6f6eb; display: flex; align-items: center; justify-content: center; color: #087a3b; flex-shrink: 0;">
+                <i data-lucide="mic" style="stroke-width: 2.5; width: 22px; height: 22px;"></i>
+              </div>
+              <div class="search-input-wrapper" style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0;">
+                <div class="search-title" data-i18n-target="searchPh" style="font-size: 17px; font-weight: 800; color: #1e293b;">Bolo ya type karo...</div>
+                <div class="search-hint" data-i18n-target="searchHint" style="font-size: 13px; color: #64748b; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Mujhe Sector 25 mein Juki ka kaam chahiye</div>
+              </div>
+              <button id="lang-btn" class="lang-pill" onclick="event.stopPropagation();" style="background: #f0fdf4; border: 1.5px solid #087a3b; padding: 6px 10px; border-radius: 20px; color: #087a3b; font-weight: 700; font-size: 13px; display: flex; align-items: center; gap: 4px; cursor: pointer; flex-shrink:0;">
+                <span data-i18n-target="langName">Hinglish</span> <i data-lucide="chevron-down" style="width:14px; height:14px; stroke-width: 3;"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Categories -->
+          <div class="categories-row" style="display: flex; gap: 16px; overflow-x: auto; padding: 4px 16px 20px; -ms-overflow-style: none; scrollbar-width: none;">
+            <button class="cat-item" onclick="app.selectCategory('loom')" style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; width: 76px;">
+              <div class="cat-icon" style="background: #e0f2fe; color: #3b82f6; width:62px; height:62px; border-radius:50%; font-size:32px; display:flex; align-items:center; justify-content:center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">🧵</div>
+              <span style="font-size: 12.5px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.2;">Loom Work</span>
+            </button>
+            <button class="cat-item" onclick="app.selectCategory('silai')" style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; width: 76px;">
+              <div class="cat-icon" style="background: #e0e7ff; color: #6366f1; width:62px; height:62px; border-radius:50%; font-size:32px; display:flex; align-items:center; justify-content:center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">🪡</div>
+              <span style="font-size: 12.5px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.2;">Juki<br>Machine</span>
+            </button>
+            <button class="cat-item" onclick="app.selectCategory('boutique')" style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; width: 76px;">
+              <div class="cat-icon" style="background: #ffe4e6; color: #f43f5e; width:62px; height:62px; border-radius:50%; font-size:32px; display:flex; align-items:center; justify-content:center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">✂️</div>
+              <span style="font-size: 12.5px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.2;">Stitching</span>
+            </button>
+            <button class="cat-item" onclick="app.selectCategory('packing')" style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; width: 76px;">
+              <div class="cat-icon" style="background: #f1f5f9; color: #64748b; width:62px; height:62px; border-radius:50%; font-size:32px; display:flex; align-items:center; justify-content:center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">🪖</div>
+              <span style="font-size: 12.5px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.2;">Helper /<br>Palledar</span>
+            </button>
+            <button class="cat-item" onclick="app.selectCategory('maintenance')" style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; width: 76px;">
+              <div class="cat-icon" style="background: #fef3c7; color: #d97706; width:62px; height: 62px; border-radius:50%; font-size:32px; display:flex; align-items:center; justify-content:center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">⚡</div>
+              <span style="font-size: 12.5px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.2;">Welder /<br>Electrician</span>
+            </button>
+            <button class="cat-item" onclick="app.selectCategory('factory')" style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; width: 76px;">
+              <div class="cat-icon" style="background: #f1f5f9; color: #475569; width:62px; height:62px; border-radius:50%; font-size:32px; display:flex; align-items:center; justify-content:center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">🏭</div>
+              <span style="font-size: 12.5px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.2;">Factory</span>
+            </button>
+            <button class="cat-item" onclick="app.selectCategory('office')" style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; width: 76px;">
+              <div class="cat-icon" style="background: #fef3c7; color: #d97706; width:62px; height:62px; border-radius:50%; font-size:32px; display:flex; align-items:center; justify-content:center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">💼</div>
+              <span style="font-size: 12.5px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.2;">Office Staff</span>
+            </button>
+            <button class="cat-item" onclick="app.selectCategory('cutting')" style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; width: 76px;">
+              <div class="cat-icon" style="background: #fee2e2; color: #ef4444; width:62px; height:62px; border-radius:50%; font-size:32px; display:flex; align-items:center; justify-content:center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">✂️</div>
+              <span style="font-size: 12.5px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.2;">Cutting Master</span>
+            </button>
+          </div>
+
+          <!-- Sub Categories Container -->
+          <div id="subcat-container" style="display:none; padding: 0 16px 16px; background: var(--white); border-bottom: 1px solid var(--gray-border); margin-bottom: 16px;">
+            <div class="flex justify-between items-center mb-3">
+              <h4 id="subcat-title" style="font-size:15px; font-weight:800; color:var(--navy);">Sub Categories</h4>
+              <button onclick="app.clearCategory()" style="font-size:12px; font-weight:700; color:#ef4444; border:1px solid #fee2e2; background:#fef2f2; padding:4px 8px; border-radius:12px;">Clear All &times;</button>
+            </div>
+            <div id="subcat-chips" style="display: flex; flex-wrap: wrap; padding:0; padding-bottom:4px; gap:8px;">
+               <!-- rendered dynamic -->
+            </div>
+          </div>
+
+          <!-- Action Cards -->
+          <div class="action-cards-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 16px; margin-bottom: 20px;">
+            <div class="action-card card-find-jobs" onclick="app.switchView('jobs')" style="border: 2px solid #087a3b; background: white; border-radius: 20px; padding: 18px 14px; position: relative; box-shadow: none; display: flex; flex-direction: column; cursor: pointer;">
+              <div class="ac-top" style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                <span style="font-size: 18px; margin-bottom: 2px;">💼</span>
+                <h3 style="font-size: 18px; font-weight: 800; color: #087a3b; margin: 0; display: flex; align-items: center; gap: 8px;">Find Jobs</h3>
+              </div>
+              <p class="ac-sub" style="font-size: 13px; color: #64748b; font-weight: 500; margin: 0;">Kaam dhoondo aasani se ➔</p>
+            </div>
+            
+            <div class="action-card card-post-job" onclick="app.openModal('post-modal')" style="background: #eff6ff; border: none; border-radius: 20px; padding: 18px 14px; position: relative; box-shadow: none; display: flex; flex-direction: column; cursor: pointer;">
+              <div class="ac-top" style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                <span style="font-size: 18px; margin-bottom: 2px;">✉️</span>
+                <h3 style="font-size: 18px; font-weight: 800; color: #071f64; margin: 0; display: flex; align-items: center; gap: 8px;">Post a Job</h3>
+              </div>
+              <p class="ac-sub" style="font-size: 13px; color: #64748b; font-weight: 500; margin: 0;">Apni requirement daalein ➔</p>
+            </div>
+          </div>
+
+          <!-- Market Wall Banner -->
+          <div class="market-wall-banner" onclick="app.switchView('market')">
+            <div class="mwb-icon"><i data-lucide="shopping-bag"></i></div>
+            <div class="mwb-content">
+              <h4 data-i18n-target="marketWallTitle">Market Wall</h4>
+              <p data-i18n-target="marketWallSub">Kapda, yarn, machine, spare parts aur local deals</p>
+            </div>
+            <div class="mwb-arrow"><i data-lucide="arrow-right"></i></div>
+          </div>
+
+          <!-- Filter Chips -->
+          <div class="filter-chips hide-scrollbar" id="job-filter-chips">
+            <button class="f-chip active" data-i18n-target="filterAll" onclick="app.setJobFilter('all', this)">田 All Jobs</button>
+            <button class="f-chip" data-i18n-target="filterNear" onclick="app.setJobFilter('near', this)">📍 Near Me</button>
+            <button class="f-chip" onclick="app.setJobFilter('today', this)">🔥 Today's Jobs</button>
+            <button class="f-chip" onclick="app.setJobFilter('verified', this)">🛡️ Verified Only</button>
+          </div>
+
+          <!-- Top Jobs List -->
+          <div class="section-header flex justify-between items-center mt-2">
+            <h3 data-i18n-target="topJobsTitle" id="dynamic-jobs-title">✨ Top Jobs For You</h3>
+          </div>
+          <div class="jobs-list" id="dynamic-jobs-list">
+            <!-- Jobs will be injected here by JS -->
+          </div>
+          <!-- extra padding for bottom nav -->
+          <div style="height: 120px;"></div>
+        </section>
+
+        <!-- PROFILE VIEW -->
+        <section id="view-profile" class="view" style="background:#f1f5f9; min-height:100vh;">
+          <div style="background:var(--primary); padding: 50px 16px 80px; text-align: center; color: white; position: relative;">
+            <div style="position: relative; display: inline-block; margin-bottom: 16px;">
+              <div style="width: 100px; height: 100px; border-radius: 50%; background: white; padding: 4px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Felix&backgroundColor=fef08a" alt="User" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+              </div>
+              <button style="position: absolute; bottom: 0; right: 0; background: white; border: 1px solid #e2e8f0; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f59e0b; box-shadow: 0 2px 6px rgba(0,0,0,0.15); cursor: pointer;">
+                 <i data-lucide="edit-2" style="width: 16px; height: 16px; color:#f59e0b; stroke-width:3;"></i>
+              </button>
+            </div>
+            
+            <h2 style="font-size: 26px; font-weight: 800; display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 10px; letter-spacing:-0.5px;">Ramesh Kumar</h2>
+            
+            <div style="display:inline-flex; align-items:center; background:#065f2e; color:white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 16px;">
+              <span style="color:#fbbf24; margin-right:4px;">⚡</span> Online
+            </div>
+            
+            <p style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">+91 98765 43210</p>
+            
+            <button style="background: white; color: var(--primary); padding: 6px 14px; border-radius: 20px; border: none; font-size: 14px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+               <div style="background:#22c55e; color:white; border-radius:4px; padding:2px; display:flex; align-items:center; justify-content:center;"><i data-lucide="check" style="width:12px; height:12px; stroke-width:4;"></i></div> Verified Worker
+            </button>
+          </div>
+
+          <div style="padding: 0 16px 24px; position: relative;">
+            <div style="background: white; border-radius: 16px; padding: 20px 0; margin-top: -46px; position: relative; z-index: 10; display: flex; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; margin-bottom: 16px;">
+              <div style="flex: 1; text-align: center;">
+                <h4 style="font-size: 22px; color: var(--navy); font-weight: 800;">12</h4>
+                <p style="font-size: 11px; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Jobs Applied</p>
+              </div>
+              <div style="width: 1px; background: #e2e8f0;"></div>
+              <div style="flex: 1; text-align: center;">
+                <h4 style="font-size: 22px; color: var(--navy); font-weight: 800;">248</h4>
+                <p style="font-size: 11px; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Profile Views</p>
+              </div>
+              <div style="width: 1px; background: #e2e8f0;"></div>
+              <div style="flex: 1; text-align: center;">
+                <h4 style="font-size: 22px; color: var(--navy); font-weight: 800;">5</h4>
+                <p style="font-size: 11px; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Saved Jobs</p>
+              </div>
+            </div>
+
+            <div style="background: white; border-radius: 16px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <h3 style="font-size: 18px; color: var(--navy); font-weight: 800;">Mere Baare Mein</h3>
+                <button style="color: #94a3b8; font-weight: 700; border: none; background: transparent; padding:0; cursor:pointer;"><i data-lucide="edit-2" style="width: 16px; height: 16px;"></i></button>
+              </div>
+              <p style="font-size: 14.5px; color: #475569; line-height: 1.6; font-weight: 500;">Namaste, main ek experienced karigar hu. Main <b style="color:var(--navy);font-weight:700;">Interlock aur Juki machine</b> bahut expert tareeke se chalata hu. Main <b style="color:var(--navy);font-weight:700;">cushion cover, bedsheet, towel</b> aur home furnishing ka sabhi kaam bahut safai se bana leta hu.</p>
+            </div>
+
+            <div style="background: white; border-radius: 16px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="font-size: 18px; color: var(--navy); font-weight: 800;">My Skills</h3>
+                <button style="color: #94a3b8; font-weight: 700; border: none; background: transparent; padding:0; cursor:pointer;"><i data-lucide="edit-2" style="width: 16px; height: 16px;"></i></button>
+              </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <span style="background: #ecfdf5; color: var(--primary); padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 700;">Juki Machine</span>
+                <span style="background: #ecfdf5; color: var(--primary); padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 700;">Overlock</span>
+                <span style="background: #ecfdf5; color: var(--primary); padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 700;">Stitching</span>
+                <span style="background: #ecfdf5; color: var(--primary); padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 700;">Bedsheet Work</span>
+                <span style="background: #ecfdf5; color: var(--primary); padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 700;">Quilt Making</span>
+              </div>
+            </div>
+
+            <div style="background: white; border-radius: 16px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; margin-bottom: 80px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="font-size: 18px; color: var(--navy); font-weight: 800;">Work Experience</h3>
+                <button style="color: var(--primary); font-weight: 700; font-size: 14px; border: none; background: transparent;"><i data-lucide="plus" style="width: 16px; height: 16px; display: inline-block; vertical-align: text-bottom;"></i> Add</button>
+              </div>
+              <div style="display: flex; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid #f1f5f9; padding-bottom: 16px;">
+                <div style="width: 48px; height: 48px; border-radius: 8px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 20px;">🏭</div>
+                <div style="flex:1;">
+                   <h4 style="font-size: 16px; color: var(--navy); font-weight: 700;">Sr. Juki Operator</h4>
+                   <p style="font-size: 13px; color: #64748b; font-weight: 500;">Oshmita Textiles &bull; Panipat</p>
+                   <p style="font-size: 12px; color: #94a3b8; font-weight: 500; margin-top: 2px;">2021 - Present (3 Years)</p>
+                </div>
+              </div>
+            </div>
+         </section>
+
+         <!-- GROUPS / CHAT VIEW -->
+         <section id="view-groups" class="view" style="background:#f1f5f9; min-height:100vh;">
+           <div class="page-top" style="background: white; padding: 16px 20px; border-bottom: 1px solid #e2e8f0; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+             <div style="flex: 1;">
+               <h2 style="font-size: 20px; font-weight: 800; color: var(--navy); margin: 0; line-height: 1.2;">💬 Community Groups</h2>
+               <p style="font-size: 13px; color: #475569; font-weight: 500; margin: 4px 0 0 0;">Join Panipat’s textile networks</p>
+             </div>
+             <button onclick="app.clickCreateGroupBtn()" style="background: var(--primary); color: white; border: none; padding: 8px 14px; border-radius: 9999px; font-size: 13px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; white-space: nowrap; flex-shrink: 0; box-shadow: 0 4px 10px rgba(8, 122, 59, 0.15); font-family: inherit;">
+               <i data-lucide="plus" style="width: 14px; height: 14px; stroke-width: 3;"></i> Create Group
+             </button>
+           </div>
+           
+           <div id="groups-list-container" class="groups-list px-3" style="padding-bottom: 120px; display: flex; flex-direction: column; gap: 12px;"><!-- DYNAMIC -->
+             
+             <div class="group-card" style="border-radius: 16px; padding: 16px; border: 1px solid #e2e8f0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; align-items: center; justify-content: space-between;">
+               <div style="display: flex; align-items: center; gap: 12px;">
+                 <div class="grp-icon" style="width: 52px; height: 52px; border-radius: 16px; background: #ecfdf5; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i data-lucide="users" style="width: 24px; height: 24px; color: var(--primary);"></i></div>
+                 <div style="flex: 1;">
+                   <h4 style="font-size: 16px; font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 4px;">Juki Operators Group</h4>
+                   <p style="font-size: 13px; color: #475569; font-weight: 500; margin-bottom: 8px; line-height: 1.3;">Juki, Single Needle, Overlock workers</p>
+                   <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600;">
+                      <span style="color: #64748b; display: flex; align-items: center; gap: 4px;"><i data-lucide="user" style="width: 14px; height: 14px;"></i> 1.2K</span>
+                      <span style="color: #cbd5e1;">•</span>
+                      <span style="color: var(--primary); display: flex; align-items: center; gap: 4px;"><div style="width: 8px; height: 8px; background: var(--primary); border-radius: 50%;"></div> 32 online</span>
+                   </div>
+                 </div>
+               </div>
+               <button class="btn-secondary-small" style="background: white; border: 2px solid var(--primary); padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 800; color: var(--primary); cursor: pointer;" onclick="app.showToast('Juki Operators Group chat is open! 💬')">Open</button>
+             </div>
+             
+             <div class="group-card" style="border-radius: 16px; padding: 16px; border: 1px solid #e2e8f0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; align-items: center; justify-content: space-between;">
+               <div style="display: flex; align-items: center; gap: 12px;">
+                 <div class="grp-icon" style="width: 52px; height: 52px; border-radius: 16px; background: #ecfdf5; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i data-lucide="users" style="width: 24px; height: 24px; color: var(--primary);"></i></div>
+                 <div style="flex: 1;">
+                   <h4 style="font-size: 16px; font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 4px;">Loom & Weaver Group</h4>
+                   <p style="font-size: 13px; color: #475569; font-weight: 500; margin-bottom: 8px; line-height: 1.3;">Power Loom, Handloom, Rapier Loom workers</p>
+                   <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600;">
+                      <span style="color: #64748b; display: flex; align-items: center; gap: 4px;"><i data-lucide="user" style="width: 14px; height: 14px;"></i> 1.0K</span>
+                      <span style="color: #cbd5e1;">•</span>
+                      <span style="color: var(--primary); display: flex; align-items: center; gap: 4px;"><div style="width: 8px; height: 8px; background: var(--primary); border-radius: 50%;"></div> 45 online</span>
+                   </div>
+                 </div>
+               </div>
+               <button class="btn-secondary-small" style="background: white; border: 2px solid var(--primary); padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 800; color: var(--primary); cursor: pointer;" onclick="app.showToast('Loom & Weaver Group chat is open! 💬')">Open</button>
+             </div>
+
+             <div class="group-card" style="border-radius: 16px; padding: 16px; border: 1px solid #e2e8f0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; align-items: center; justify-content: space-between;">
+               <div style="display: flex; align-items: center; gap: 12px;">
+                 <div class="grp-icon" style="width: 52px; height: 52px; border-radius: 16px; background: #ecfdf5; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i data-lucide="users" style="width: 24px; height: 24px; color: var(--primary);"></i></div>
+                 <div style="flex: 1;">
+                   <h4 style="font-size: 16px; font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 4px;">Stitching & Cutting Masters</h4>
+                   <p style="font-size: 13px; color: #475569; font-weight: 500; margin-bottom: 8px; line-height: 1.3;">Stitching, cutting, master karigar</p>
+                   <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600;">
+                      <span style="color: #64748b; display: flex; align-items: center; gap: 4px;"><i data-lucide="user" style="width: 14px; height: 14px;"></i> 980</span>
+                      <span style="color: #cbd5e1;">•</span>
+                      <span style="color: var(--primary); display: flex; align-items: center; gap: 4px;"><div style="width: 8px; height: 8px; background: var(--primary); border-radius: 50%;"></div> 28 online</span>
+                   </div>
+                 </div>
+               </div>
+               <button class="btn-secondary-small" style="background: var(--primary); border: none; padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 800; color: white; cursor: pointer;" onclick="app.showToast('Joined Stitching & Cutting Masters! 🤝')">Join</button>
+             </div>
+
+             <div class="group-card" style="border-radius: 16px; padding: 16px; border: 1px solid #e2e8f0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; align-items: center; justify-content: space-between;">
+               <div style="display: flex; align-items: center; gap: 12px;">
+                 <div class="grp-icon" style="width: 52px; height: 52px; border-radius: 16px; background: #ecfdf5; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i data-lucide="users" style="width: 24px; height: 24px; color: var(--primary);"></i></div>
+                 <div style="flex: 1;">
+                   <h4 style="font-size: 16px; font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 4px;">Helpers & Palledar Group</h4>
+                   <p style="font-size: 13px; color: #475569; font-weight: 500; margin-bottom: 8px; line-height: 1.3;">Helper, loading, packing, factory support</p>
+                   <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600;">
+                      <span style="color: #64748b; display: flex; align-items: center; gap: 4px;"><i data-lucide="user" style="width: 14px; height: 14px;"></i> 2.1K</span>
+                      <span style="color: #cbd5e1;">•</span>
+                      <span style="color: var(--primary); display: flex; align-items: center; gap: 4px;"><div style="width: 8px; height: 8px; background: var(--primary); border-radius: 50%;"></div> 56 online</span>
+                   </div>
+                 </div>
+               </div>
+               <button class="btn-secondary-small" style="background: var(--primary); border: none; padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 800; color: white; cursor: pointer;" onclick="app.showToast('Joined Helpers & Palledar Group! 🤝')">Join</button>
+             </div>
+
+             <div class="group-card" style="border-radius: 16px; padding: 16px; border: 1px solid #e2e8f0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; align-items: center; justify-content: space-between;">
+               <div style="display: flex; align-items: center; gap: 12px;">
+                 <div class="grp-icon" style="width: 52px; height: 52px; border-radius: 16px; background: #ecfdf5; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i data-lucide="users" style="width: 24px; height: 24px; color: var(--primary);"></i></div>
+                 <div style="flex: 1;">
+                   <h4 style="font-size: 16px; font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 4px;">Maintenance & Mechanics</h4>
+                   <p style="font-size: 13px; color: #475569; font-weight: 500; margin-bottom: 8px; line-height: 1.3;">Electrician, mechanic, machine repair</p>
+                   <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600;">
+                      <span style="color: #64748b; display: flex; align-items: center; gap: 4px;"><i data-lucide="user" style="width: 14px; height: 14px;"></i> 760</span>
+                      <span style="color: #cbd5e1;">•</span>
+                      <span style="color: var(--primary); display: flex; align-items: center; gap: 4px;"><div style="width: 8px; height: 8px; background: var(--primary); border-radius: 50%;"></div> 18 online</span>
+                   </div>
+                 </div>
+               </div>
+               <button class="btn-secondary-small" style="background: var(--primary); border: none; padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 800; color: white; cursor: pointer;" onclick="app.showToast('Joined Maintenance & Mechanics! 🤝')">Join</button>
+             </div>
+
+           </div>
+         </section>
+
+        <!-- MARKET WALL VIEW -->
+        <section id="view-market" class="view" style="background:#f1f5f9; min-height:100vh; padding-bottom: 120px;">
+           <div class="page-top" style="background: white; padding-bottom: 2px; margin-bottom: 0;">
+            <h2 data-i18n-target="marketWallTitle" style="font-size:24px; font-weight:800; color:var(--navy);">🛒 Market Wall</h2>
+            <p data-i18n-target="marketWallSub" style="font-size:14px; color:#475569; font-weight:500;">Kapda, yarn, machine, spare parts aur local deals</p>
+          </div>
+          
+          <div style="background: white; border-bottom: 1px solid #e2e8f0; padding-top: 16px; margin-bottom: 16px;">
+            <div class="market-search-area px-3 mb-4">
+              <div class="search-bar" style="margin-bottom:16px; border: 1px solid #cbd5e1; background: #f8fafc; border-radius: 12px;">
+                <div class="search-input-wrapper">
+                  <input type="text" placeholder="Search fabric, yarn, machine..." style="width:100%; border:none; background:transparent; outline:none; font-size:15px; font-weight: 500; font-family: inherit; color: var(--navy); padding: 4px 0;">
+                </div>
+                <div class="search-icon-bg" style="width: 36px; height: 36px; background: transparent; color: #94a3b8">
+                  <i data-lucide="search" style="width: 20px; height: 20px;"></i>
+                </div>
+              </div>
+              <button class="btn-primary w-full flex-center gap-2" style="border-radius: 12px; padding: 14px; font-size: 16px; font-weight: 800;" onclick="app.openModal('market-post-modal')"><i data-lucide="plus-circle" style="width:20px;height:20px;"></i> Post Market Item</button>
+            </div>
+
+            <!-- Market Wall Filters -->
+            <div class="filter-chips hide-scrollbar" style="padding: 0 16px 16px; margin-bottom:0;">
+              <button class="f-chip active">All</button>
+              <button class="f-chip">Yarn / Fabric</button>
+              <button class="f-chip">Machines</button>
+              <button class="f-chip">Spare Parts</button>
+              <button class="f-chip">Old Stock</button>
+              <button class="f-chip">Factory Space</button>
+            </div>
+          </div>
+
+          <div class="market-wall-list" id="market-wall-list" style="padding: 0 16px; display: flex; flex-direction: column; gap: 16px;">
+            <!-- Post 1 -->
+            <div class="job-card market-card" style="padding: 16px;">
+               <div style="display: flex; gap: 16px; margin-bottom: 14px;">
+                 <div style="width: 80px; height: 80px; border-radius: 12px; background: #e2e8f0; overflow: hidden; flex-shrink: 0;">
+                    <img src="https://images.unsplash.com/photo-1605289982774-9a6fce5680f7?auto=format&fit=crop&w=200&q=80" style="width:100%; height:100%; object-fit:cover;" alt="thumbnail">
+                 </div>
+                 <div style="flex: 1;">
+                   <div style="display: flex; justify-content: space-between; align-items:flex-start; margin-bottom: 6px;">
+                     <span style="font-size: 11px; background: #ecfdf5; color: var(--primary); padding: 4px 8px; border-radius: 12px; font-weight: 700; display:inline-flex; align-items:center; gap:4px;"><i data-lucide="check-circle" style="width:12px; height:12px;"></i> Verified</span>
+                     <span style="font-size: 11px; color: #94a3b8; font-weight: 600;">1h ago</span>
+                   </div>
+                   <h3 style="font-size: 16px; color: var(--navy); font-weight: 800; line-height: 1.3; margin-bottom: 4px;">Cotton Yarn Available</h3>
+                   <p style="font-size: 13px; color: #475569; font-weight: 600; display:flex; align-items:center; gap:4px;"><i data-lucide="store" style="width:14px; height:14px; color:#94a3b8;"></i> Shiv Textiles</p>
+                 </div>
+               </div>
+               <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom: 16px; background: #f8fafc; padding: 12px; border-radius: 12px; border: 1px solid #f1f5f9;">
+                 <div style="grid-column: span 2; display:flex; align-items:center; gap:6px;"><i data-lucide="map-pin" style="width:14px; height:14px; color:#94a3b8;"></i> <strong style="font-size:13px; color:var(--navy); font-weight:700;">Sector 29, Panipat</strong></div>
+                 <div><span style="font-size:11px; color:#64748b; font-weight:600; display:block;">Quantity</span><strong style="font-size:13px; color:var(--navy); font-weight:800;">MOQ: 100 kg</strong></div>
+                 <div><span style="font-size:11px; color:#64748b; font-weight:600; display:block;">Rate</span><strong style="font-size:13px; color:var(--primary); font-weight:800;">Seller se confirm</strong></div>
+               </div>
+               <div style="display:flex; gap: 8px;">
+                 <button style="flex:1; background: #f0fdf4; color: var(--primary); border: 2px solid var(--primary); border-radius: 10px; padding: 8px; font-size: 14px; font-weight: 800; display:flex; align-items:center; justify-content:center; gap:6px;"><i data-lucide="message-square" style="width:18px; height:18px;"></i> Chat</button>
+                 <button style="flex:1; background: var(--primary); color: white; border: none; border-radius: 10px; padding: 8px; font-size: 14px; font-weight: 800; display:flex; align-items:center; justify-content:center; gap:6px;"><i data-lucide="phone" style="width:18px; height:18px;"></i> Call</button>
+                 <button style="width:44px; background: white; color: #94a3b8; border: 1px solid #cbd5e1; border-radius: 10px; padding: 8px; display:flex; align-items:center; justify-content:center;"><i data-lucide="star" style="width:18px; height:18px;"></i></button>
+               </div>
+            </div>
+
+            <!-- Post 2 -->
+            <div class="job-card market-card" style="padding: 16px;">
+               <div style="display: flex; gap: 16px; margin-bottom: 14px;">
+                 <div style="width: 80px; height: 80px; border-radius: 12px; background: #334155; overflow: hidden; flex-shrink: 0; position:relative; display:flex; align-items:center; justify-content:center;">
+                    <img src="https://images.unsplash.com/photo-1558222218-b7b54eede3f3?auto=format&fit=crop&w=200&q=80" style="width:100%; height:100%; object-fit:cover; opacity:0.7;" alt="machine">
+                    <i data-lucide="play" style="position:absolute; width:24px; height:24px; color:white; fill:white; drop-shadow(0 2px 4px rgba(0,0,0,0.5));"></i>
+                 </div>
+                 <div style="flex: 1;">
+                   <div style="display: flex; justify-content: space-between; align-items:flex-start; margin-bottom: 6px;">
+                     <span style="font-size: 11px; background: #ecfdf5; color: var(--primary); padding: 4px 8px; border-radius: 12px; font-weight: 700; display:inline-flex; align-items:center; gap:4px;"><i data-lucide="check-circle" style="width:12px; height:12px;"></i> Verified</span>
+                     <span style="font-size: 11px; color: #94a3b8; font-weight: 600;">3h ago</span>
+                   </div>
+                   <h3 style="font-size: 16px; color: var(--navy); font-weight: 800; line-height: 1.3; margin-bottom: 4px;">Juki Machine for Sale</h3>
+                   <p style="font-size: 13px; color: #475569; font-weight: 600; display:flex; align-items:center; gap:4px;"><i data-lucide="store" style="width:14px; height:14px; color:#94a3b8;"></i> Machine Dealer</p>
+                 </div>
+               </div>
+               <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom: 16px; background: #f8fafc; padding: 12px; border-radius: 12px; border: 1px solid #f1f5f9;">
+                 <div style="grid-column: span 2; display:flex; align-items:center; gap:6px;"><i data-lucide="map-pin" style="width:14px; height:14px; color:#94a3b8;"></i> <strong style="font-size:13px; color:var(--navy); font-weight:700;">Sanoli Road, Panipat</strong></div>
+                 <div><span style="font-size:11px; color:#64748b; font-weight:600; display:block;">Details</span><strong style="font-size:13px; color:var(--navy); font-weight:800;">Used single needle</strong></div>
+                 <div><span style="font-size:11px; color:#64748b; font-weight:600; display:block;">Rate</span><strong style="font-size:13px; color:var(--primary); font-weight:800;">Negotiable</strong></div>
+               </div>
+               <div style="display:flex; gap: 8px;">
+                 <button style="flex:1; background: #f0fdf4; color: var(--primary); border: 2px solid var(--primary); border-radius: 10px; padding: 8px; font-size: 14px; font-weight: 800; display:flex; align-items:center; justify-content:center; gap:6px;"><i data-lucide="message-square" style="width:18px; height:18px;"></i> Chat</button>
+                 <button style="flex:1; background: var(--primary); color: white; border: none; border-radius: 10px; padding: 8px; font-size: 14px; font-weight: 800; display:flex; align-items:center; justify-content:center; gap:6px;"><i data-lucide="phone" style="width:18px; height:18px;"></i> Call</button>
+                 <button style="width:44px; background: white; color: #94a3b8; border: 1px solid #cbd5e1; border-radius: 10px; padding: 8px; display:flex; align-items:center; justify-content:center;"><i data-lucide="star" style="width:18px; height:18px;"></i></button>
+               </div>
+            </div>
+
+            <!-- Post 3 -->
+            <div class="job-card market-card" style="padding: 16px;">
+               <div style="display: flex; gap: 16px; margin-bottom: 14px;">
+                 <div style="width: 80px; height: 80px; border-radius: 12px; background: #e2e8f0; overflow: hidden; flex-shrink: 0;">
+                    <img src="https://images.unsplash.com/photo-1528318259074-b4df4bc97eb4?auto=format&fit=crop&w=200&q=80" style="width:100%; height:100%; object-fit:cover;" alt="fabric">
+                 </div>
+                 <div style="flex: 1;">
+                   <div style="display: flex; justify-content: space-between; align-items:flex-start; margin-bottom: 6px;">
+                     <span style="font-size: 11px; background: #ecfdf5; color: var(--primary); padding: 4px 8px; border-radius: 12px; font-weight: 700; display:inline-flex; align-items:center; gap:4px;"><i data-lucide="check-circle" style="width:12px; height:12px;"></i> Verified</span>
+                     <span style="font-size: 11px; color: #94a3b8; font-weight: 600;">5h ago</span>
+                   </div>
+                   <h3 style="font-size: 16px; color: var(--navy); font-weight: 800; line-height: 1.3; margin-bottom: 4px;">Bedsheet Fabric Lot</h3>
+                   <p style="font-size: 13px; color: #475569; font-weight: 600; display:flex; align-items:center; gap:4px;"><i data-lucide="store" style="width:14px; height:14px; color:#94a3b8;"></i> Panipat Fabrics</p>
+                 </div>
+               </div>
+               <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom: 16px; background: #f8fafc; padding: 12px; border-radius: 12px; border: 1px solid #f1f5f9;">
+                 <div style="grid-column: span 2; display:flex; align-items:center; gap:6px;"><i data-lucide="map-pin" style="width:14px; height:14px; color:#94a3b8;"></i> <strong style="font-size:13px; color:var(--navy); font-weight:700;">Sector 25, Panipat</strong></div>
+                 <div><span style="font-size:11px; color:#64748b; font-weight:600; display:block;">Details</span><strong style="font-size:13px; color:var(--navy); font-weight:800;">58 inch, 120 GSM</strong></div>
+                 <div><span style="font-size:11px; color:#64748b; font-weight:600; display:block;">Price</span><strong style="font-size:13px; color:var(--primary); font-weight:800;">Seller se confirm</strong></div>
+               </div>
+               <div style="display:flex; gap: 8px;">
+                 <button style="flex:1; background: #f0fdf4; color: var(--primary); border: 2px solid var(--primary); border-radius: 10px; padding: 8px; font-size: 14px; font-weight: 800; display:flex; align-items:center; justify-content:center; gap:6px;"><i data-lucide="message-square" style="width:18px; height:18px;"></i> Chat</button>
+                 <button style="flex:1; background: var(--primary); color: white; border: none; border-radius: 10px; padding: 8px; font-size: 14px; font-weight: 800; display:flex; align-items:center; justify-content:center; gap:6px;"><i data-lucide="phone" style="width:18px; height:18px;"></i> Call</button>
+                 <button style="width:44px; background: white; color: #94a3b8; border: 1px solid #cbd5e1; border-radius: 10px; padding: 8px; display:flex; align-items:center; justify-content:center;"><i data-lucide="star" style="width:18px; height:18px;"></i></button>
+               </div>
+            </div>
+
+            <!-- Post 4 -->
+            <div class="job-card market-card" style="padding: 16px;">
+               <div style="display: flex; gap: 16px; margin-bottom: 14px;">
+                 <div style="width: 80px; height: 80px; border-radius: 12px; background: #e2e8f0; overflow: hidden; flex-shrink: 0; display:flex; align-items:center; justify-content:center;">
+                    <i data-lucide="factory" style="width:32px; height:32px; color:#94a3b8;"></i>
+                 </div>
+                 <div style="flex: 1;">
+                   <div style="display: flex; justify-content: space-between; align-items:flex-start; margin-bottom: 6px;">
+                     <span style="font-size: 11px; background: #ecfdf5; color: var(--primary); padding: 4px 8px; border-radius: 12px; font-weight: 700; display:inline-flex; align-items:center; gap:4px;"><i data-lucide="check-circle" style="width:12px; height:12px;"></i> Verified</span>
+                     <span style="font-size: 11px; color: #94a3b8; font-weight: 600;">10h ago</span>
+                   </div>
+                   <h3 style="font-size: 16px; color: var(--navy); font-weight: 800; line-height: 1.3; margin-bottom: 4px;">Factory Space Available</h3>
+                   <p style="font-size: 13px; color: #475569; font-weight: 600; display:flex; align-items:center; gap:4px;"><i data-lucide="user" style="width:14px; height:14px; color:#94a3b8;"></i> Local Owner</p>
+                 </div>
+               </div>
+               <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom: 16px; background: #f8fafc; padding: 12px; border-radius: 12px; border: 1px solid #f1f5f9;">
+                 <div style="grid-column: span 2; display:flex; align-items:center; gap:6px;"><i data-lucide="map-pin" style="width:14px; height:14px; color:#94a3b8;"></i> <strong style="font-size:13px; color:var(--navy); font-weight:700;">Sector 24, Panipat</strong></div>
+                 <div><span style="font-size:11px; color:#64748b; font-weight:600; display:block;">Area</span><strong style="font-size:13px; color:var(--navy); font-weight:800;">5000 sq.ft.</strong></div>
+                 <div><span style="font-size:11px; color:#64748b; font-weight:600; display:block;">Rent</span><strong style="font-size:13px; color:var(--primary); font-weight:800;">Owner se confirm</strong></div>
+               </div>
+               <div style="display:flex; gap: 8px;">
+                 <button style="flex:1; background: #f0fdf4; color: var(--primary); border: 2px solid var(--primary); border-radius: 10px; padding: 8px; font-size: 14px; font-weight: 800; display:flex; align-items:center; justify-content:center; gap:6px;"><i data-lucide="message-square" style="width:18px; height:18px;"></i> Chat</button>
+                 <button style="flex:1; background: var(--primary); color: white; border: none; border-radius: 10px; padding: 8px; font-size: 14px; font-weight: 800; display:flex; align-items:center; justify-content:center; gap:6px;"><i data-lucide="phone" style="width:18px; height:18px;"></i> Call</button>
+                 <button style="width:44px; background: white; color: #94a3b8; border: 1px solid #cbd5e1; border-radius: 10px; padding: 8px; display:flex; align-items:center; justify-content:center;"><i data-lucide="star" style="width:18px; height:18px;"></i></button>
+               </div>
+            </div>
+
+          </div>
+        </section>
+        <section id="view-jobs" class="view">
+          <div class="page-top"><h2>All Jobs</h2><p>View all job postings</p></div>
+        </section>
+        <!-- COMMUNITY VIEW -->
+        <section id="view-community" class="view" style="background:#f1f5f9; min-height:100vh;">
+          <div class="page-top" style="background: white; padding-bottom: 2px; margin-bottom: 0; border-bottom: 1px solid #e2e8f0;">
+            <h2 style="font-size:24px; font-weight:800; color:var(--navy);"><i data-lucide="users" style="display:inline-block; vertical-align:middle; width:24px; height:24px; color:var(--primary); margin-top:-4px; margin-right:4px;"></i> Community Feed</h2>
+            <p style="font-size:14px; color:#475569; font-weight:500;">Panipat ke textile karigaron ke sawal aur charcha</p>
+          </div>
+
+          <div style="background: white; border-bottom: 1px solid #e2e8f0; padding-top: 16px; margin-bottom: 16px;">
+            <div class="px-3 mb-4">
+              <button class="btn-primary w-full" style="border-radius: 12px; padding: 14px; font-size: 16px; font-weight: 800; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; color: white;" onclick="app.openModal('community-post-modal')">
+                <i data-lucide="plus-circle" style="width:20px;height:20px;"></i> Post New Discussion
+              </button>
+            </div>
+
+            <!-- Community Filters -->
+            <div class="filter-chips hide-scrollbar" style="padding: 0 16px 16px; margin-bottom:0; display: flex; gap: 8px; overflow-x: auto;">
+              <button class="f-chip active" id="com-chip-all" style="flex-shrink:0;" onclick="app.filterCommunity('All', this)">All Feed</button>
+              <button class="f-chip" style="flex-shrink:0;" onclick="app.filterCommunity('Silai Kaam', this)">Silai Kaam</button>
+              <button class="f-chip" style="flex-shrink:0;" onclick="app.filterCommunity('Loom Support', this)">Loom Support</button>
+              <button class="f-chip" style="flex-shrink:0;" onclick="app.filterCommunity('Hiring Help', this)">Hiring Help</button>
+              <button class="f-chip" style="flex-shrink:0;" onclick="app.filterCommunity('Local Rates', this)">Local Rates</button>
+            </div>
+          </div>
+
+          <div class="community-feed-list" id="community-posts-list" style="padding: 0 16px 120px; display: flex; flex-direction: column; gap: 16px;">
+             <!-- RENDERED DYNAMICALLY IN SCRIPT.JS -->
+          </div>
+        </section>
+        <!-- BOUTIQUE GALLERY VIEW -->
+        <section id="view-boutique" class="view" style="background:#f1f5f9; min-height:100vh;">
+          <!-- Hero Section -->
+          <div style="background: white; padding: 20px 16px; border-bottom: 1px solid #e2e8f0; margin-bottom: 16px;">
+            <p style="font-size: 11px; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;"># Fashion & Boutique Gallery</p>
+            <h2 style="font-size: 22px; font-weight: 900; color: var(--navy); line-height: 1.2;">Discover Panipat Fashion</h2>
+            <p style="font-size: 13px; color: #475569; font-weight: 500; margin-top: 6px; line-height: 1.4;">
+              Boutiques, designer suits, bridal wear, ladies tailor aur latest collections.
+            </p>
+          </div>
+
+          <!-- Filter Chips -->
+          <div class="filter-chips" style="padding: 0 16px 16px; display: flex; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;">
+            <style>
+              .filter-chips::-webkit-scrollbar { display: none; }
+            </style>
+            <button class="f-chip active" onclick="app.filterBoutiqueGallery('All', this)">All</button>
+            <button class="f-chip" onclick="app.filterBoutiqueGallery('Designer', this)">Designer Suits</button>
+            <button class="f-chip" onclick="app.filterBoutiqueGallery('Bridal', this)">Bridal Wear</button>
+            <button class="f-chip" onclick="app.filterBoutiqueGallery('Tailor', this)">Ladies Tailor</button>
+          </div>
+
+          <!-- Boutique Cards List -->
+          <div id="boutique-cards-container" style="padding: 0 16px 20px; display: flex; flex-direction: column; gap: 16px;">
+            
+            <!-- Card 1: Riya Boutique -->
+            <div class="boutique-gallery-card" data-category="Designer" style="background: white; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.03); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s;">
+              <!-- Large icon / cover area -->
+              <div style="background: linear-gradient(135deg, #fdf2f8, #fbcfe8); height: 100px; display: flex; align-items: center; justify-content: center; font-size: 44px; position: relative; border-bottom: 1px solid #fbcfe8;">
+                <span>👗</span>
+                <span style="position: absolute; right: 12px; top: 12px; background: #db2777; color: white; font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 12px; box-shadow: 0 2px 6px rgba(219,39,119,0.2);">Designer Suits</span>
+              </div>
+              
+              <!-- Content -->
+              <div style="padding: 16px; display: flex; flex-direction: column; gap: 6px;">
+                <h3 style="font-size: 17px; font-weight: 800; color: var(--navy); margin: 0;">Riya Boutique</h3>
+                <div style="display: flex; align-items: center; gap: 4px; font-size: 12px; color: #475569; font-weight: 700;">
+                  <i data-lucide="map-pin" style="width: 14px; height: 14px; color: #64748b;"></i>
+                  <span>Model Town, Panipat</span>
+                </div>
+                <p style="font-size: 13.5px; color: #475569; font-weight: 500; line-height: 1.4; margin: 6px 0 12px;">
+                  Designer Suits • Bridal Collection • Kurti Collection
+                </p>
+                
+                <!-- Card Actions -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+                  <button class="btn-secondary" style="padding: 10px 0; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 4px; border: 1px solid #cbd5e1; border-radius: 12px; background: white; color: var(--navy); cursor: pointer;" onclick="app.showToast('💬 Opening chat with Riya Boutique...')">
+                    <i data-lucide="message-square" style="width: 15px; height: 15px; color: var(--primary);"></i> Chat
+                  </button>
+                  <a href="tel:+919876543210" class="btn-secondary" style="padding: 10px 0; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 4px; border: 1px solid #cbd5e1; border-radius: 12px; background: white; color: var(--navy); cursor: pointer; text-decoration: none;" onclick="app.showToast('📞 Calling Riya Boutique...')">
+                    <i data-lucide="phone" style="width: 15px; height: 15px; color: #22c55e;"></i> Call
+                  </a>
+                  <button class="btn-primary" style="padding: 10px 0; font-size: 13px; font-weight: 800; border: none; border-radius: 12px; background: var(--primary); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;" onclick="app.showBoutiqueDetail('riya')">
+                    View
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Noor Fashion Studio -->
+            <div class="boutique-gallery-card" data-category="Tailor" style="background: white; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.03); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s;">
+              <!-- Large icon / cover area -->
+              <div style="background: linear-gradient(135deg, #f0fdf4, #bbf7d0); height: 100px; display: flex; align-items: center; justify-content: center; font-size: 44px; position: relative; border-bottom: 1px solid #bbf7d0;">
+                <span>🥻</span>
+                <span style="position: absolute; right: 12px; top: 12px; background: #16a34a; color: white; font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 12px; box-shadow: 0 2px 6px rgba(22,163,74,0.2);">Ladies Tailor</span>
+              </div>
+              
+              <!-- Content -->
+              <div style="padding: 16px; display: flex; flex-direction: column; gap: 6px;">
+                <h3 style="font-size: 17px; font-weight: 800; color: var(--navy); margin: 0;">Noor Fashion Studio</h3>
+                <div style="display: flex; align-items: center; gap: 4px; font-size: 12px; color: #475569; font-weight: 700;">
+                  <i data-lucide="map-pin" style="width: 14px; height: 14px; color: #64748b;"></i>
+                  <span>Insar Bazaar, Panipat</span>
+                </div>
+                <p style="font-size: 13.5px; color: #475569; font-weight: 500; line-height: 1.4; margin: 6px 0 12px;">
+                  Ladies Tailor • Alteration • Kurti Designs
+                </p>
+                
+                <!-- Card Actions -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+                  <button class="btn-secondary" style="padding: 10px 0; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 4px; border: 1px solid #cbd5e1; border-radius: 12px; background: white; color: var(--navy); cursor: pointer;" onclick="app.showToast('💬 Opening chat with Noor Fashion Studio...')">
+                    <i data-lucide="message-square" style="width: 15px; height: 15px; color: var(--primary);"></i> Chat
+                  </button>
+                  <a href="tel:+919876543211" class="btn-secondary" style="padding: 10px 0; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 4px; border: 1px solid #cbd5e1; border-radius: 12px; background: white; color: var(--navy); cursor: pointer; text-decoration: none;" onclick="app.showToast('📞 Calling Noor Fashion Studio...')">
+                    <i data-lucide="phone" style="width: 15px; height: 15px; color: #22c55e;"></i> Call
+                  </a>
+                  <button class="btn-primary" style="padding: 10px 0; font-size: 13px; font-weight: 800; border: none; border-radius: 12px; background: var(--primary); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;" onclick="app.showBoutiqueDetail('noor')">
+                    View
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3: Aayat Bridal Wear -->
+            <div class="boutique-gallery-card" data-category="Bridal" style="background: white; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.03); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s;">
+              <!-- Large icon / cover area -->
+              <div style="background: linear-gradient(135deg, #fef2f2, #fecaca); height: 100px; display: flex; align-items: center; justify-content: center; font-size: 44px; position: relative; border-bottom: 1px solid #fecaca;">
+                <span>💃</span>
+                <span style="position: absolute; right: 12px; top: 12px; background: #dc2626; color: white; font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 12px; box-shadow: 0 2px 6px rgba(220,38,38,0.2);">Bridal Wear</span>
+              </div>
+              
+              <!-- Content -->
+              <div style="padding: 16px; display: flex; flex-direction: column; gap: 6px;">
+                <h3 style="font-size: 17px; font-weight: 800; color: var(--navy); margin: 0;">Aayat Bridal Wear</h3>
+                <div style="display: flex; align-items: center; gap: 4px; font-size: 12px; color: #475569; font-weight: 700;">
+                  <i data-lucide="map-pin" style="width: 14px; height: 14px; color: #64748b;"></i>
+                  <span>Panipat</span>
+                </div>
+                <p style="font-size: 13.5px; color: #475569; font-weight: 500; line-height: 1.4; margin: 6px 0 12px;">
+                  Bridal Wear • Lehenga • Party Wear
+                </p>
+                
+                <!-- Card Actions -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+                  <button class="btn-secondary" style="padding: 10px 0; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 4px; border: 1px solid #cbd5e1; border-radius: 12px; background: white; color: var(--navy); cursor: pointer;" onclick="app.showToast('💬 Opening chat with Aayat Bridal Wear...')">
+                    <i data-lucide="message-square" style="width: 15px; height: 15px; color: var(--primary);"></i> Chat
+                  </button>
+                  <a href="tel:+919876543212" class="btn-secondary" style="padding: 10px 0; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 4px; border: 1px solid #cbd5e1; border-radius: 12px; background: white; color: var(--navy); cursor: pointer; text-decoration: none;" onclick="app.showToast('📞 Calling Aayat Bridal Wear...')">
+                    <i data-lucide="phone" style="width: 15px; height: 15px; color: #22c55e;"></i> Call
+                  </a>
+                  <button class="btn-primary" style="padding: 10px 0; font-size: 13px; font-weight: 800; border: none; border-radius: 12px; background: var(--primary); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;" onclick="app.showBoutiqueDetail('aayat')">
+                    View
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Fashion & SEO Blogs Section -->
+          <div style="padding: 20px 16px 120px; border-top: 1px solid #e2e8f0; margin-top: 20px; background: #fafafa;">
+            <h3 style="font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <span style="background: #fdf2f8; padding: 2px 8px; border-radius: 8px; color: #db2777; font-size: 12px; font-weight: 800;"># Fashion</span>
+              <span>Fashion &amp; Boutique Blogs</span>
+            </h3>
+
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              
+              <!-- Blog 1 Connection -->
+              <div class="job-card" style="padding: 16px; border-radius: 16px; border: 1px solid #e2e8f0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 10px;">
+                <div style="display: flex; align-items: flex-start; gap: 12px;">
+                  <div style="width: 44px; height: 44px; border-radius: 12px; background: #fff1f2; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; border: 1px solid #ffe4e6;">
+                    👗
+                  </div>
+                  <div style="flex: 1;">
+                    <h4 style="font-size: 14.5px; font-weight: 800; color: var(--navy); line-height: 1.3; margin: 0;">Bridal Suit Designs 2026</h4>
+                    <p style="font-size: 11px; color: #64748b; font-weight: 700; margin-top: 2px; display: flex; align-items: center; gap: 4px;">
+                      <i data-lucide="sparkles" style="width: 11px; height: 11px;"></i> Boutique Special
+                    </p>
+                  </div>
+                </div>
+                <p style="font-size: 13px; color: #475569; font-weight: 500; line-height: 1.4; margin: 0;">Panipat boutique owners ke liye latest bridal and designer wear ideas.</p>
+                <div style="display: flex; justify-content: flex-end; margin-top: 2px;">
+                  <button class="btn-primary" style="padding: 6px 14px; font-size: 11.5px; font-weight: 800; border-radius: 10px; border: none; cursor: pointer; color: white;" onclick="app.readBlog('bridal-suit-2026')">
+                    Read Blog
+                  </button>
+                </div>
+              </div>
+
+              <!-- Blog 2 Connection -->
+              <div class="job-card" style="padding: 16px; border-radius: 16px; border: 1px solid #e2e8f0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 10px;">
+                <div style="display: flex; align-items: flex-start; gap: 12px;">
+                  <div style="width: 44px; height: 44px; border-radius: 12px; background: #f3e8ff; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; border: 1px solid #e9d5ff;">
+                    🎀
+                  </div>
+                  <div style="flex: 1;">
+                    <h4 style="font-size: 14.5px; font-weight: 800; color: var(--navy); line-height: 1.3; margin: 0;">Trending Kurti Designs</h4>
+                    <p style="font-size: 11px; color: #64748b; font-weight: 700; margin-top: 2px; display: flex; align-items: center; gap: 4px;">
+                      <i data-lucide="search" style="width: 11px; height: 11px;"></i> SEO Ideas
+                    </p>
+                  </div>
+                </div>
+                <p style="font-size: 13px; color: #475569; font-weight: 500; line-height: 1.4; margin: 0;">Ladies tailor aur boutique owners ke liye simple fashion SEO ideas.</p>
+                <div style="display: flex; justify-content: flex-end; margin-top: 2px;">
+                  <button class="btn-primary" style="padding: 6px 14px; font-size: 11.5px; font-weight: 800; border-radius: 10px; border: none; cursor: pointer; color: white;" onclick="app.readBlog('trending-kurti')">
+                    Read Blog
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+        <section id="view-companies" class="view"></section>
+        
+        <!-- BLOGS & NEWS VIEW -->
+        <section id="view-blogs" class="view" style="background:#f1f5f9; min-height:100vh;">
+          <!-- Header -->
+          <div class="page-top" style="background: white; padding-bottom: 12px; border-bottom: 1px solid #e2e8f0; margin-bottom: 16px;">
+            <h2 style="font-size: 24px; font-weight: 800; color: var(--navy); display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="book-open" style="width:24px; height:24px; color:var(--primary);"></i> 
+              <span>Blogs & News</span>
+            </h2>
+            <p style="font-size: 14px; color: #475569; font-weight: 500;">Panipat's updates, textile guides, and fashion trends</p>
+          </div>
+
+          <!-- Section 1: Main Blogs / News -->
+          <div style="padding: 0 16px 8px;">
+            <h3 style="font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <span style="background: #e0f2fe; padding: 2px 8px; border-radius: 8px; color: #0284c7; font-size: 12px; font-weight: 800;"># Main</span>
+              <span>Main Blogs / News</span>
+            </h3>
+            
+            <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px;">
+              
+              <!-- Blog 1 -->
+              <div class="job-card" style="padding: 16px; border-radius: 16px; border: 1px solid #e2e8f0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 10px;">
+                <div style="display: flex; align-items: flex-start; gap: 12px;">
+                  <div style="width: 48px; height: 48px; border-radius: 12px; background: #ecfdf5; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; border: 1px solid #d1fae5;">
+                    🪡
+                  </div>
+                  <div style="flex: 1;">
+                    <h4 style="font-size: 15px; font-weight: 800; color: var(--navy); line-height: 1.3; margin: 0;">Juki Operator ka kaam kya hota hai?</h4>
+                    <p style="font-size: 11px; color: #64748b; font-weight: 700; margin-top: 2px; display: flex; align-items: center; gap: 4px;">
+                      <i data-lucide="tag" style="width: 11px; height: 11px;"></i> Sewing & Stitching
+                    </p>
+                  </div>
+                </div>
+                <p style="font-size: 13.5px; color: #475569; font-weight: 500; line-height: 1.4; margin: 0;">Juki operator ek specific machine skill hai, jabki stitching ek full category hai.</p>
+                <div style="display: flex; justify-content: flex-end; margin-top: 4px;">
+                  <button class="btn-primary" style="padding: 8px 16px; font-size: 12px; font-weight: 800; border-radius: 10px; border: none; cursor: pointer; color: white;" onclick="app.readBlog('juki-operator')">
+                    Read Blog
+                  </button>
+                </div>
+              </div>
+
+              <!-- Blog 2 -->
+              <div class="job-card" style="padding: 16px; border-radius: 16px; border: 1px solid #e2e8f0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 10px;">
+                <div style="display: flex; align-items: flex-start; gap: 12px;">
+                  <div style="width: 48px; height: 48px; border-radius: 12px; background: #f0f9ff; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; border: 1px solid #e0f2fe;">
+                    🏭
+                  </div>
+                  <div style="flex: 1;">
+                    <h4 style="font-size: 15px; font-weight: 800; color: var(--navy); line-height: 1.3; margin: 0;">Panipat Textile Market Update</h4>
+                    <p style="font-size: 11px; color: #64748b; font-weight: 700; margin-top: 2px; display: flex; align-items: center; gap: 4px;">
+                      <i data-lucide="trending-up" style="width: 11px; height: 11px;"></i> Market &amp; Rates
+                    </p>
+                  </div>
+                </div>
+                <p style="font-size: 13.5px; color: #475569; font-weight: 500; line-height: 1.4; margin: 0;">Panipat ke textile market me demand, rates aur factory setup related updates.</p>
+                <div style="display: flex; justify-content: flex-end; margin-top: 4px;">
+                  <button class="btn-primary" style="padding: 8px 16px; font-size: 12px; font-weight: 800; border-radius: 10px; border: none; cursor: pointer; color: white;" onclick="app.readBlog('market-update')">
+                    Read Blog
+                  </button>
+                </div>
+              </div>
+
+              <!-- Blog 3 -->
+              <div class="job-card" style="padding: 16px; border-radius: 16px; border: 1px solid #e2e8f0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 10px;">
+                <div style="display: flex; align-items: flex-start; gap: 12px;">
+                  <div style="width: 48px; height: 48px; border-radius: 12px; background: #fff7ed; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; border: 1px solid #ffedd5;">
+                    🔧
+                  </div>
+                  <div style="flex: 1;">
+                    <h4 style="font-size: 15px; font-weight: 800; color: var(--navy); line-height: 1.3; margin: 0;">Machine Guide</h4>
+                    <p style="font-size: 11px; color: #64748b; font-weight: 700; margin-top: 2px; display: flex; align-items: center; gap: 4px;">
+                      <i data-lucide="tool" style="width: 11px; height: 11px;"></i> Tutorial &amp; Maintenance
+                    </p>
+                  </div>
+                </div>
+                <p style="font-size: 13.5px; color: #475569; font-weight: 500; line-height: 1.4; margin: 0;">Single needle, double needle, overlock, interlock aur pico machine ka use simple language me.</p>
+                <div style="display: flex; justify-content: flex-end; margin-top: 4px;">
+                  <button class="btn-primary" style="padding: 8px 16px; font-size: 12px; font-weight: 800; border-radius: 10px; border: none; cursor: pointer; color: white;" onclick="app.readBlog('machine-guide')">
+                    Read Blog
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Section 2: Boutique / Fashion Blogs -->
+          <div style="padding: 0 16px 120px;">
+            <h3 style="font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <span style="background: #fdf2f8; padding: 2px 8px; border-radius: 8px; color: #db2777; font-size: 12px; font-weight: 800;"># Fashion &amp; Boutique</span>
+              <span>Boutique / Fashion Blogs</span>
+            </h3>
+
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              
+              <!-- Blog 4 -->
+              <div class="job-card" style="padding: 16px; border-radius: 16px; border: 1px solid #e2e8f0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 10px;">
+                <div style="display: flex; align-items: flex-start; gap: 12px;">
+                  <div style="width: 48px; height: 48px; border-radius: 12px; background: #fff1f2; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; border: 1px solid #ffe4e6;">
+                    👗
+                  </div>
+                  <div style="flex: 1;">
+                    <h4 style="font-size: 15px; font-weight: 800; color: var(--navy); line-height: 1.3; margin: 0;">Bridal Suit Designs 2026</h4>
+                    <p style="font-size: 11px; color: #64748b; font-weight: 700; margin-top: 2px; display: flex; align-items: center; gap: 4px;">
+                      <i data-lucide="sparkles" style="width: 11px; height: 11px;"></i> Boutique Special
+                    </p>
+                  </div>
+                </div>
+                <p style="font-size: 13.5px; color: #475569; font-weight: 500; line-height: 1.4; margin: 0;">Panipat boutique owners ke liye latest bridal and designer wear ideas.</p>
+                <div style="display: flex; justify-content: flex-end; margin-top: 4px;">
+                  <button class="btn-primary" style="padding: 8px 16px; font-size: 12px; font-weight: 800; border-radius: 10px; border: none; cursor: pointer; color: white;" onclick="app.readBlog('bridal-suit-2026')">
+                    Read Blog
+                  </button>
+                </div>
+              </div>
+
+              <!-- Blog 5 -->
+              <div class="job-card" style="padding: 16px; border-radius: 16px; border: 1px solid #e2e8f0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 10px;">
+                <div style="display: flex; align-items: flex-start; gap: 12px;">
+                  <div style="width: 48px; height: 48px; border-radius: 12px; background: #faf5ff; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; border: 1px solid #f3e8ff;">
+                    🎀
+                  </div>
+                  <div style="flex: 1;">
+                    <h4 style="font-size: 15px; font-weight: 800; color: var(--navy); line-height: 1.3; margin: 0;">Trending Kurti Designs</h4>
+                    <p style="font-size: 11px; color: #64748b; font-weight: 700; margin-top: 2px; display: flex; align-items: center; gap: 4px;">
+                      <i data-lucide="search" style="width: 11px; height: 11px;"></i> SEO Ideas
+                    </p>
+                  </div>
+                </div>
+                <p style="font-size: 13.5px; color: #475569; font-weight: 500; line-height: 1.4; margin: 0;">Ladies tailor aur boutique owners ke liye simple fashion SEO ideas.</p>
+                <div style="display: flex; justify-content: flex-end; margin-top: 4px;">
+                  <button class="btn-primary" style="padding: 8px 16px; font-size: 12px; font-weight: 800; border-radius: 10px; border: none; cursor: pointer; color: white;" onclick="app.readBlog('trending-kurti')">
+                    Read Blog
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- BOTTOM NAVIGATION -->
+      <nav id="bottom-nav">
+        <button class="nav-item active" onclick="app.switchView('home', this)">
+          <i data-lucide="home"></i>
+          <span>Home</span>
+        </button>
+        <button class="nav-item" onclick="app.switchView('jobs', this)">
+          <i data-lucide="briefcase"></i>
+          <span>Jobs</span>
+        </button>
+        <div class="nav-mic-wrapper">
+          <button class="nav-mic-btn" onclick="app.openModal('ai-modal')">
+            <i data-lucide="mic"></i>
+          </button>
+        </div>
+        <button class="nav-item" onclick="app.switchView('groups', this)" style="position:relative;">
+          <i data-lucide="message-square"></i>
+          <span>Chats</span>
+          <span class="badge" style="position:absolute; top:8px; right:20px; background:#ef4444; border:none;">12</span>
+        </button>
+        <button class="nav-item" onclick="app.switchView('profile', this)">
+          <i data-lucide="user"></i>
+          <span>Profile</span>
+        </button>
+      </nav>
+
+      <!-- AI ASSISTANT MODAL -->
+      <div id="ai-modal-overlay" class="modal-overlay" onclick="app.closeModal('ai-modal')"></div>
+      <div id="ai-modal" class="modal-bottom-sheet">
+        <div class="modal-handle-bar"><div class="handle"></div></div>
+        <div class="modal-header">
+          <div class="flex items-center gap-2">
+            <div class="ai-icon"><i data-lucide="sparkles"></i></div>
+            <h3 data-i18n-target="aiPopupTitle">TexKam AI Assistant</h3>
+          </div>
+          <button class="btn-icon" onclick="app.closeModal('ai-modal')"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body">
+          <p class="ai-desc" data-i18n-target="aiPopupDisc">Rough language me bolo. AI tumhari requirement ko proper post bana dega.</p>
+          <div class="ai-quick-chips">
+            <span class="chip-sm" onclick="app.fillAi('Juki operator chahiye')">Juki operator chahiye</span>
+            <span class="chip-sm" onclick="app.fillAi('Maal banwana hai')">Maal banwana hai</span>
+            <span class="chip-sm" onclick="app.fillAi('Electrician chahiye')">Electrician chahiye</span>
+          </div>
+          <div class="ai-input-area">
+            <textarea id="ai-prompt" placeholder="Boliye ya likhiye..." rows="3"></textarea>
+            <button class="ai-send-btn" onclick="app.sendAiQuery()"><i data-lucide="send"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- POST REQUIREMENT MODAL -->
+      <div id="post-modal-overlay" class="modal-overlay" onclick="app.closeModal('post-modal')"></div>
+      <div id="post-modal" class="modal-bottom-sheet h-tall">
+        <div class="modal-handle-bar"><div class="handle"></div></div>
+        <div class="modal-header" style="flex-direction: column; align-items: flex-start; gap: 4px; padding: 16px 20px 14px 20px; border-bottom: 1px solid var(--gray-border); position: relative;">
+          <h3 id="post-modal-title" style="margin: 0; font-size: 18px; color: var(--navy); font-weight: 700;">Post Requirement</h3>
+          <p class="modal-subtitle" style="font-size: 13px; color: #64748b; margin: 0; font-weight: 500;">Apni requirement type select karo</p>
+          <button class="btn-icon" onclick="app.closeModal('post-modal')" style="position: absolute; right: 20px; top: 18px; background: transparent; border: none; cursor: pointer;"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body pb-safe hide-scrollbar">
+          <div class="post-type-scroll hide-scrollbar mb-4" style="margin-top: 4px;">
+            <button class="f-chip active" id="f-chip-karigar" onclick="app.setPostModalType('karigar', this)"><span>👨‍🔧 Karigar<br>Chahiye</span></button>
+            <button class="f-chip" onclick="app.setPostModalType('maal', this)"><span>🛏️ Maal<br>Banwana Hai</span></button>
+            <button class="f-chip" id="f-chip-job" onclick="app.setPostModalType('job', this)"><span>💼 Job Vacancy</span></button>
+            <button class="f-chip" onclick="app.setPostModalType('contractor', this)"><span>🤝 Contractor<br>Chahiye</span></button>
+            <button class="f-chip" onclick="app.setPostModalType('direct', this)"><span>✍️ Direct Post</span></button>
+          </div>
+          
+          <div id="form-karigar" class="dynamic-form active" style="display:block;">
+            <div class="form-group">
+               <label>Kaunsa kaam / skill chahiye?</label>
+               <textarea class="form-input" id="karigar-work-skill" rows="3" placeholder="Jaise: 10 Juki operator chahiye, night shift ke liye"></textarea>
+            </div>
+            <div class="form-group">
+               <label>Kitne Karigar Chahiye?</label>
+               <input type="text" class="form-input" id="karigar-count" placeholder="Jaise: 5 / 10 / 20">
+            </div>
+            <div class="form-group">
+               <label>Rate / Salary</label>
+               <input type="text" class="form-input" id="karigar-rate" placeholder="₹12 per piece / ₹600 day / ₹18,000 month">
+            </div>
+            <div class="form-group">
+               <label>Location</label>
+               <input type="text" class="form-input" id="karigar-location" placeholder="Sector 29, Panipat">
+            </div>
+            <div class="form-group mt-3 flex items-center gap-2" style="font-size:15px; font-weight:500; color:var(--navy); cursor:pointer;" onclick="app.triggerMediaUpload('karigar')">
+               <i data-lucide="camera" style="width:20px;height:20px;color:#475569;"></i> Add Photo / <i data-lucide="video" style="width:20px;height:20px;color:#475569;"></i> Add Short Video
+            </div>
+            <input type="file" id="media-upload-karigar" accept="image/*,video/*" style="display:none;" onchange="app.handleMediaSelection('karigar', event)">
+            <div id="media-preview-container-karigar" style="display:none;"></div>
+            <div class="form-group mt-3 flex items-center justify-between" style="flex-direction:row;">
+               <label class="flex items-center gap-1" style="font-size:15px; margin:0;"><span style="font-size:18px;">🔥</span> Urgent Requirement</label>
+               <input type="checkbox" id="karigar-urgent" style="width:20px;height:20px; accent-color: var(--primary);">
+            </div>
+            <button class="btn-primary w-full mt-4 flex-center gap-2" style="background:#16a34a; font-size:16px;" onclick="app.submitPostModal('Karigar requirement post ho gayi ✅')">Post Live Karein 🚀</button>
+          </div>
+
+          <div id="form-maal" class="dynamic-form" style="display:none;">
+            <div class="form-group">
+              <label>Kya maal banwana hai?</label>
+              <input type="text" class="form-input" id="maal-name" placeholder="Jaise: 500 bedsheet stitch karwani hai">
+            </div>
+            <div class="form-group">
+              <label>Quantity</label>
+              <input type="text" class="form-input" id="maal-qty" placeholder="Jaise: 500 pcs / 1000 pcs">
+            </div>
+            <div class="form-group">
+              <label>Fabric Ready Hai?</label>
+              <div class="form-chips-container">
+                 <button class="form-chip selected" onclick="app.toggleFormChip(this)">Haan</button>
+                 <button class="form-chip" onclick="app.toggleFormChip(this)">Nahi</button>
+                 <button class="form-chip" onclick="app.toggleFormChip(this)">Discuss</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Rate / Budget</label>
+              <input type="text" class="form-input" id="maal-rate" placeholder="Jaise: ₹12 per piece / rate discuss">
+            </div>
+            <div class="form-group">
+              <label>Location</label>
+              <input type="text" class="form-input" id="maal-location" placeholder="Pickup location: Panipat">
+            </div>
+            <div class="form-group">
+              <label>WhatsApp Number</label>
+              <input type="tel" class="form-input" id="maal-phone" placeholder="+91 XXXXXXXXXX">
+            </div>
+            <div class="form-group mt-3 flex items-center gap-2" style="font-size:15px; font-weight:500; color:var(--navy); cursor:pointer;" onclick="app.triggerMediaUpload('maal')">
+               <i data-lucide="camera" style="width:20px;height:20px;color:#475569;"></i> Add Product Photo / <i data-lucide="video" style="width:20px;height:20px;color:#475569;"></i> Add Sample Video
+            </div>
+            <input type="file" id="media-upload-maal" accept="image/*,video/*" style="display:none;" onchange="app.handleMediaSelection('maal', event)">
+            <div id="media-preview-container-maal" style="display:none;"></div>
+            <button class="btn-primary w-full mt-4 flex-center gap-2" style="background:#16a34a; font-size:16px;" onclick="app.submitPostModal('Maal banwane ki requirement post ho gayi ✅')">Maal Requirement Post Karein 🚀</button>
+          </div>
+
+          <div id="form-job" class="dynamic-form" style="display:none;">
+            <div class="form-group">
+              <label>Job Category</label>
+              <select class="form-input" id="job-category">
+                <option>Select Category</option>
+                <option>Textile / Factory Work</option>
+                <option>Office Job</option>
+                <option>Sales & Marketing</option>
+                <option>Accounts / Finance</option>
+                <option>Design / Textile Design</option>
+                <option>Maintenance / Mechanic</option>
+                <option>Boutique / Fashion</option>
+                <option>Delivery / Helper</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Job role / title</label>
+              <input type="text" class="form-input" id="job-role" placeholder="Jaise: Juki Machine Operator Required">
+            </div>
+            <input type="hidden" id="job-title" value="">
+            <div class="form-group">
+              <label>Company / Factory Name</label>
+              <input type="text" class="form-input" id="job-company" placeholder="Enter factory name">
+            </div>
+            <div class="form-group">
+              <label>Location / Sector</label>
+              <input type="text" class="form-input" id="job-loc" placeholder="e.g. Sector 29">
+            </div>
+            <div class="form-group">
+              <label>City</label>
+              <select class="form-input" id="job-city">
+                <option>Panipat</option>
+                <option>Karnal</option>
+                <option>Sonipat</option>
+                <option>Delhi NCR</option>
+              </select>
+            </div>
+            <div class="flex gap-2">
+              <div class="form-group flex-1">
+                <label>Salary From</label>
+                <input type="text" class="form-input" id="job-salary-from" placeholder="Minimum salary">
+              </div>
+              <div class="form-group flex-1">
+                <label>Salary To</label>
+                <input type="text" class="form-input" id="job-salary-to" placeholder="Maximum salary">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Job Type</label>
+              <div class="form-chips-container">
+                 <button class="form-chip selected" onclick="app.toggleFormChip(this)">Full Time</button>
+                 <button class="form-chip" onclick="app.toggleFormChip(this)">Part Time</button>
+                 <button class="form-chip" onclick="app.toggleFormChip(this)">Contract</button>
+                 <button class="form-chip" onclick="app.toggleFormChip(this)">Piece Rate</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Experience Required</label>
+              <div class="form-chips-container">
+                 <button class="form-chip selected" onclick="app.toggleFormChip(this)">Fresher</button>
+                 <button class="form-chip" onclick="app.toggleFormChip(this)">1+ saal</button>
+                 <button class="form-chip" onclick="app.toggleFormChip(this)">2+ saal</button>
+                 <button class="form-chip" onclick="app.toggleFormChip(this)">5+ saal</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Gender</label>
+              <div class="form-chips-container">
+                 <button class="form-chip selected" onclick="app.toggleFormChip(this)">Any</button>
+                 <button class="form-chip" onclick="app.toggleFormChip(this)">Male</button>
+                 <button class="form-chip" onclick="app.toggleFormChip(this)">Female</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Vacancies</label>
+              <input type="text" class="form-input" id="job-vacancies" placeholder="Jaise: 5">
+            </div>
+            <div class="form-group">
+              <label>WhatsApp Number</label>
+              <input type="tel" class="form-input" id="job-phone" placeholder="+91 XXXXXXXXXX">
+            </div>
+            <div class="form-group">
+              <label>Job Description</label>
+              <textarea class="form-input" id="job-desc" rows="3" placeholder="Brief details about the work..."></textarea>
+            </div>
+            <div class="form-group mt-3 flex items-center gap-2" style="font-size:15px; font-weight:500; color:var(--navy); cursor:pointer;" onclick="app.triggerMediaUpload('job')">
+               <i data-lucide="camera" style="width:20px;height:20px;color:#475569;"></i> Add Factory Photo / <i data-lucide="video" style="width:20px;height:20px;color:#475569;"></i> Add Work Video
+            </div>
+            <input type="file" id="media-upload-job" accept="image/*,video/*" style="display:none;" onchange="app.handleMediaSelection('job', event)">
+            <div id="media-preview-container-job" style="display:none;"></div>
+            <div class="form-group mt-3 flex items-center justify-between" style="flex-direction:row;">
+               <label class="flex items-center gap-1" style="font-size:15px; margin:0;"><span style="font-size:18px;">🔥</span> Urgent Hiring</label>
+               <input type="checkbox" id="job-urgent" style="width:20px;height:20px; accent-color: var(--primary);">
+            </div>
+            <button class="btn-primary w-full mt-4 flex-center gap-2" style="background:#16a34a; font-size:16px;" onclick="app.submitPostModal('Job vacancy post ho gayi ✅')">Post Job Now 🚀</button>
+          </div>
+
+          <div id="form-contractor" class="dynamic-form" style="display:none;">
+            <div class="form-group">
+              <label>Kaam / order details</label>
+              <textarea class="form-input" id="contractor-work" rows="3" placeholder="Jaise: 2000 quilt stitching ka order hai"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Quantity / Order Size</label>
+              <input type="text" class="form-input" id="contractor-qty" placeholder="Jaise: 2000 pcs / bulk work">
+            </div>
+            <div class="form-group">
+              <label>Rate / Budget</label>
+              <input type="text" class="form-input" id="contractor-rate" placeholder="Rate discuss / ₹ per piece">
+            </div>
+            <div class="form-group">
+              <label>Required Team Size</label>
+              <input type="text" class="form-input" id="contractor-team" placeholder="Jaise: 10 karigar ki team">
+            </div>
+            <div class="form-group">
+              <label>Work Location</label>
+              <input type="text" class="form-input" id="contractor-location" placeholder="Factory location: Panipat">
+            </div>
+            <div class="form-group">
+              <label>WhatsApp Number</label>
+              <input type="tel" class="form-input" id="contractor-phone" placeholder="+91 XXXXXXXXXX">
+            </div>
+            <div class="form-group mt-3 flex items-center gap-2" style="font-size:15px; font-weight:500; color:var(--navy); cursor:pointer;" onclick="app.triggerMediaUpload('contractor')">
+               <i data-lucide="camera" style="width:20px;height:20px;color:#475569;"></i> Add Work Photo / <i data-lucide="video" style="width:20px;height:20px;color:#475569;"></i> Add Sample Video
+            </div>
+            <input type="file" id="media-upload-contractor" accept="image/*,video/*" style="display:none;" onchange="app.handleMediaSelection('contractor', event)">
+            <div id="media-preview-container-contractor" style="display:none;"></div>
+            <button class="btn-primary w-full mt-4 flex-center gap-2" style="background:#16a34a; font-size:16px;" onclick="app.submitPostModal('Contractor requirement post ho gayi ✅')">Contractor Requirement Post Karein 🚀</button>
+          </div>
+
+          <div id="form-direct" class="dynamic-form" style="display:none;">
+            <div class="form-group">
+              <label>Apni requirement likho</label>
+              <textarea class="form-input" id="direct-content" rows="4" placeholder="Jo bhi requirement hai simple language me likho"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Category Optional</label>
+              <select class="form-input" id="direct-category">
+                <option>Textile Work</option>
+                <option>Hiring</option>
+                <option>Job</option>
+                <option>Discussion</option>
+                <option>Boutique</option>
+                <option>Maintenance</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Location</label>
+              <input type="text" class="form-input" id="direct-location" placeholder="Location optional">
+            </div>
+            <div class="form-group">
+              <label>Salary / Rate Optional</label>
+              <input type="text" class="form-input" id="direct-salary" placeholder="Salary / rate optional">
+            </div>
+            <div class="form-group">
+              <label>WhatsApp Number</label>
+              <input type="tel" class="form-input" id="direct-phone" placeholder="+91 XXXXXXXXXX">
+            </div>
+            <div class="form-group mt-3 flex items-center gap-2" style="font-size:15px; font-weight:500; color:var(--navy); cursor:pointer;" onclick="app.triggerMediaUpload('direct')">
+               <i data-lucide="camera" style="width:20px;height:20px;color:#475569;"></i> Add Photo / <i data-lucide="video" style="width:20px;height:20px;color:#475569;"></i> Add Short Video
+            </div>
+            <input type="file" id="media-upload-direct" accept="image/*,video/*" style="display:none;" onchange="app.handleMediaSelection('direct', event)">
+            <div id="media-preview-container-direct" style="display:none;"></div>
+            <button class="btn-primary w-full mt-4 flex-center gap-2" style="background:#16a34a; font-size:16px;" onclick="app.submitPostModal('Direct post live ho gayi ✅')">Direct Post Live Karein 🚀</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MARKET POST MODAL -->
+      <div id="market-post-modal-overlay" class="modal-overlay" onclick="app.closeModal('market-post-modal')"></div>
+      <div id="market-post-modal" class="modal-bottom-sheet h-tall">
+        <div class="modal-handle-bar"><div class="handle"></div></div>
+        <div class="modal-header">
+          <h3>Post Market Item</h3>
+          <button class="btn-icon" onclick="app.closeModal('market-post-modal')"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body pb-safe hide-scrollbar">
+          <div class="form-group">
+            <label>Item Type</label>
+            <select class="form-input" id="market-item-type">
+              <option>Yarn / Fabric</option>
+              <option>Machine</option>
+              <option>Spare Parts</option>
+              <option>Old Stock / Lot</option>
+              <option>Factory Space</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Item Name</label>
+            <input type="text" class="form-input" id="market-item-name" placeholder="Jaise: Cotton yarn available / Juki machine for sale">
+          </div>
+          <div class="form-group">
+            <label>Quantity</label>
+            <input type="text" class="form-input" id="market-item-qty" placeholder="Jaise: 100 kg / 500 pcs / 1 machine">
+          </div>
+          <div class="form-group">
+            <label>Rate / Price</label>
+            <input type="text" class="form-input" id="market-item-price" placeholder="Rate / price likho ya Discuss">
+          </div>
+          <div class="form-group">
+            <label>Location</label>
+            <input type="text" class="form-input" id="market-item-loc" placeholder="Sector 29, Panipat">
+          </div>
+          <div class="form-group">
+            <label>Seller / Company Name</label>
+            <input type="text" class="form-input" id="market-item-seller" placeholder="Factory / shop / seller name">
+          </div>
+          <div class="form-group">
+            <label>WhatsApp Number</label>
+            <input type="tel" class="form-input" id="market-item-phone" placeholder="+91 XXXXXXXXXX">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-input" id="market-item-desc" rows="3" placeholder="Maal ke baare me details likho..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Upload Media</label>
+            <div class="upload-placeholder flex-center flex-column" onclick="app.triggerMediaUpload('market')" style="cursor:pointer; background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 12px; padding: 20px;">
+              <div style="display:flex; gap:16px; margin-bottom:8px;">
+                <i data-lucide="camera" style="color:#9ca3af; width:28px;height:28px;"></i>
+                <i data-lucide="video" style="color:#9ca3af; width:28px;height:28px;"></i>
+              </div>
+              <span style="font-size:13px; color:#64748b; font-weight:600;">📷 Add Photo / 🎥 Add Short Video</span>
+            </div>
+            <input type="file" id="media-upload-market" accept="image/*,video/*" style="display:none;" onchange="app.handleMediaSelection('market', event)">
+            <div id="market-upload-preview" style="display:none; margin-top:12px; padding:8px; border:1px solid #e2e8f0; border-radius:8px; align-items:center; gap:12px; background:#f8fafc;">
+               <div style="width:48px;height:48px;border-radius:8px;background:#e2e8f0;overflow:hidden;"><img src="https://images.unsplash.com/photo-1528318259074-b4df4bc97eb4?auto=format&fit=crop&w=100&q=80" style="width:100%;height:100%;object-fit:cover;"></div>
+               <div style="flex:1;"><p style="font-size:13px;font-weight:700;color:var(--navy);">image_001.jpg</p><p style="font-size:11px;color:#94a3b8;">Ready to upload</p></div>
+               <button onclick="app.removeMedia('market')" style="background:transparent;border:none;color:#ef4444;"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+            </div>
+          </div>
+          <div class="form-group" style="display:flex; align-items:center; gap:8px;">
+             <input type="checkbox" id="market-urgent" style="width:18px; height:18px; accent-color: #ef4444;">
+             <label for="market-urgent" style="margin:0; font-size:15px; font-weight:700; color:var(--navy);">🔥 Urgent Sale</label>
+          </div>
+          <button class="btn-primary w-full mt-2" style="padding: 16px; font-size: 16px; font-weight:800; border-radius:12px; margin-bottom: 20px;" onclick="app.submitMarketPost(this)">Post Market Item 🚀</button>
+        </div>
+      </div>
+
+      <!-- CREATE GROUP MODAL -->
+      <div id="create-group-modal-overlay" class="modal-overlay" onclick="app.closeModal('create-group-modal')"></div>
+      <div id="create-group-modal" class="modal-bottom-sheet" style="max-height: 85vh; overflow-y: auto;">
+        <div class="modal-handle-bar"><div class="handle"></div></div>
+        <div class="modal-header">
+          <div>
+            <h3 style="font-size: 18px; font-weight:800; color: var(--navy); margin: 0;">Create Group</h3>
+            <p style="font-size: 12px; color: #64748b; margin: 2px 0 0 0; font-weight: 500;">Apne kaam ka group banao</p>
+          </div>
+          <button class="btn-icon" style="background:transparent; border:none; cursor: pointer;" onclick="app.closeModal('create-group-modal')"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body pb-safe" style="padding: 16px;">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label style="display:block; font-size:12px; font-weight:700; color:var(--navy); margin-bottom:6px;">Group Name</label>
+            <input type="text" class="form-input" id="new-group-name" placeholder="Jaise: Panipat Weaver Guild" style="width:100%; padding:10px 12px; border:1px solid #cbd5e1; border-radius:8px; font-size: 14px;">
+          </div>
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label style="display:block; font-size:12px; font-weight:700; color:var(--navy); margin-bottom:6px;">Category</label>
+            <select class="form-input" id="new-group-category" style="width:100%; padding:10px 12px; border:1px solid #cbd5e1; border-radius:8px; font-size: 14px; background: white;">
+              <option value="Juki Operators">Juki Operators</option>
+              <option value="Stitching Work">Stitching Work</option>
+              <option value="Cutting Masters">Cutting Masters</option>
+              <option value="Loom Workers">Loom Workers</option>
+              <option value="Packing Helpers">Packing Helpers</option>
+              <option value="Boutique Work">Boutique Work</option>
+              <option value="Maintenance">Maintenance</option>
+              <option value="Factory Jobs">Factory Jobs</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label style="display:block; font-size:12px; font-weight:700; color:var(--navy); margin-bottom:6px;">Description</label>
+            <input type="text" class="form-input" id="new-group-desc" placeholder="Jaise: Power Loom, Handloom workers network" style="width:100%; padding:10px 12px; border:1px solid #cbd5e1; border-radius:8px; font-size: 14px;">
+          </div>
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label style="display:block; font-size:12px; font-weight:700; color:var(--navy); margin-bottom:6px;">Location</label>
+            <input type="text" class="form-input" id="new-group-location" placeholder="Jaise: Sector 29, Panipat" style="width:100%; padding:10px 12px; border:1px solid #cbd5e1; border-radius:8px; font-size: 14px;">
+          </div>
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label style="display:block; font-size:12px; font-weight:700; color:var(--navy); margin-bottom:6px;">Group Type</label>
+            <select class="form-input" id="new-group-type" style="width:100%; padding:10px 12px; border:1px solid #cbd5e1; border-radius:8px; font-size: 14px; background: white;">
+              <option value="Public">Public (Anyone can join)</option>
+              <option value="Private">Private (Invite only)</option>
+            </select>
+          </div>
+          <button class="btn-primary w-full mt-2" style="background: var(--primary); padding: 14px; font-size:15px; font-weight: 800; border-radius:12px; border:none; cursor:pointer; color:white;" onclick="app.submitCreateGroup()">Create Group</button>
+        </div>
+      </div>
+
+      <!-- COMMUNITY DISCUSSION POST MODAL -->
+      <div id="community-post-modal-overlay" class="modal-overlay" onclick="app.closeModal('community-post-modal')"></div>
+      <div id="community-post-modal" class="modal-bottom-sheet">
+        <div class="modal-handle-bar"><div class="handle"></div></div>
+        <div class="modal-header">
+          <h3 style="font-size: 18px; font-weight: 800; color: var(--navy); margin: 0;">New Community Discussion</h3>
+          <button class="btn-icon" style="background:transparent; border:none; cursor: pointer;" onclick="app.closeModal('community-post-modal')"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body pb-safe hide-scrollbar" style="padding: 16px; max-height:80vh; overflow-y:auto;">
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label style="display:block; font-size:13px; font-weight:700; color:var(--navy); margin-bottom:6px;">Discussion Title</label>
+            <input type="text" class="form-input" id="com-post-title" placeholder="Jaise: Piece rate advice / Yarn quality question" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:8px;">
+          </div>
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label style="display:block; font-size:13px; font-weight:700; color:var(--navy); margin-bottom:6px;">Your Message / Detail</label>
+            <textarea class="form-input" id="com-post-content" rows="4" placeholder="Apna detail question ya topic simple hindi/english me likhein..." style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:8px; font-family:inherit;"></textarea>
+          </div>
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label style="display:block; font-size:13px; font-weight:700; color:var(--navy); margin-bottom:6px;">Category Tag</label>
+            <select class="form-input" id="com-post-tag" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:8px; background:white;">
+              <option value="Silai Kaam">Silai Kaam</option>
+              <option value="Loom Support">Loom Support</option>
+              <option value="Hiring Help">Hiring Help</option>
+              <option value="Local Rates">Local Rates</option>
+            </select>
+          </div>
+          <button class="btn-primary w-full mt-4" style="padding: 14px; font-size:16px; font-weight: 800; border-radius:12px; border:none; cursor:pointer; color:white; margin-bottom:20px;" onclick="app.submitCommunityPost()">Post Discussion 📢</button>
+        </div>
+      </div>
+
+      <!-- BLOG READER MODAL -->
+      <div id="blog-reader-modal-overlay" class="modal-overlay" onclick="app.closeModal('blog-reader-modal')"></div>
+      <div id="blog-reader-modal" class="modal-bottom-sheet h-tall" style="max-height: 85vh; overflow-y: auto;">
+        <div class="modal-handle-bar"><div class="handle"></div></div>
+        <div class="modal-header" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div id="blog-modal-icon" style="width: 36px; height: 36px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">📖</div>
+            <h3 id="blog-modal-title" style="font-size: 18px; font-weight: 800; color: var(--navy); margin: 0; line-height: 1.2;">Blog Title</h3>
+          </div>
+          <button class="btn-icon" style="background:transparent; border:none; cursor: pointer; padding: 4px;" onclick="app.closeModal('blog-reader-modal')"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body pb-safe hide-scrollbar" id="blog-modal-body" style="padding: 0 16px 24px; font-weight: 500; font-size: 14px; color: #334155; line-height: 1.6; overflow-y: auto;">
+          <!-- Content injected dynamically -->
+        </div>
+      </div>
+
+      <!-- BOUTIQUE DETAIL MODAL -->
+      <div id="boutique-detail-modal-overlay" class="modal-overlay" onclick="app.closeModal('boutique-detail-modal')"></div>
+      <div id="boutique-detail-modal" class="modal-bottom-sheet h-tall" style="max-height: 85vh; overflow-y: auto;">
+        <div class="modal-handle-bar"><div class="handle"></div></div>
+        <div class="modal-header" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div id="boutique-modal-icon" style="width: 38px; height: 38px; border-radius: 50%; background: #fdf2f8; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;">🎀</div>
+            <div>
+              <h3 id="boutique-modal-name" style="font-size: 18px; font-weight: 800; color: var(--navy); margin: 0; line-height: 1.2;">Boutique Name</h3>
+              <p id="boutique-modal-location" style="font-size: 12px; color: #64748b; font-weight: 700; margin-top: 2px;">Model Town, Panipat</p>
+            </div>
+          </div>
+          <button class="btn-icon" style="background:transparent; border:none; cursor: pointer; padding: 4px;" onclick="app.closeModal('boutique-detail-modal')"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body pb-safe hide-scrollbar" id="boutique-modal-body" style="padding: 0 16px 24px; font-weight: 500; font-size: 14px; color: #334155; line-height: 1.6;">
+          <!-- Content injected dynamically -->
+        </div>
+      </div>
+
+      <!-- JOB DETAIL MODAL -->
+      <div id="job-detail-modal-overlay" class="modal-overlay" onclick="app.closeModal('job-detail-modal')"></div>
+      <div id="job-detail-modal" class="modal-bottom-sheet h-tall" style="max-height: 85vh; overflow-y: auto;">
+        <div class="modal-handle-bar"><div class="handle"></div></div>
+        <div class="modal-header" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div id="job-modal-icon-container" style="width: 44px; height: 44px; border-radius: 12px; background: #e0f2fe; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i id="job-modal-icon-lucide" data-lucide="briefcase" style="width: 24px; height: 24px; stroke: #0284c7;"></i>
+            </div>
+            <div>
+              <h3 id="job-modal-title" style="font-size: 16px; font-weight: 800; color: var(--navy); margin: 0; line-height: 1.2;">Job Title</h3>
+              <p id="job-modal-company" style="font-size: 12px; color: #64748b; font-weight: 700; margin-top: 2px;">Company Name</p>
+            </div>
+          </div>
+          <button class="btn-icon" style="background:transparent; border:none; cursor: pointer; padding: 4px;" onclick="app.closeModal('job-detail-modal')"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body pb-safe hide-scrollbar" id="job-modal-body" style="padding: 0 16px 24px; font-weight: 500; font-size: 14px; color: #334155; line-height: 1.6;">
+          <!-- Content injected dynamically -->
+        </div>
+      </div>
+
+      <!-- LOGIN / SIGNUP MODAL -->
+      <div id="login-modal-overlay" class="modal-overlay" onclick="app.closeModal('login-modal')"></div>
+      <div id="login-modal" class="modal-bottom-sheet">
+        <div class="modal-handle-bar"><div class="handle"></div></div>
+        <div class="modal-header" style="border-bottom: 1.5px solid var(--gray-border); padding: 16px 20px 14px 20px; display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <h3 style="margin: 0; font-size: 19px; color: var(--navy); font-weight: 800;">Login / Signup</h3>
+            <p style="font-size: 13px; color: #64748b; margin: 0; font-weight: 500;">Mobile number se TexKam join karein</p>
+          </div>
+          <button class="btn-icon" onclick="app.closeModal('login-modal')" style="background: transparent; border: none; cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center;"><i data-lucide="x" style="width: 20px; height: 20px; color: #64748b;"></i></button>
+        </div>
+        <div class="modal-body" style="padding: 24px 20px;">
+          <div class="form-group" style="margin-bottom: 24px; display: flex; flex-direction: column; gap: 8px;">
+            <label style="font-size: 14px; font-weight: 700; color: var(--navy); text-align: left;">Enter mobile number</label>
+            <div style="position: relative; display: flex; align-items: center; width: 100%;">
+              <span style="position: absolute; left: 16px; font-size: 15px; font-weight: 800; color: #475569;">+91</span>
+              <input type="tel" id="login-mobile-input" placeholder="99999 99999" maxlength="10" style="width: 100%; border: 1.5px solid var(--gray-border); border-radius: 12px; padding: 14px 14px 14px 54px; font-size: 16px; font-weight: 700; outline: none; background: white; color: var(--navy);" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+            </div>
+          </div>
+          
+          <button class="btn-primary" style="background: var(--primary); color: white; border: none; border-radius: 12px; padding: 14px; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; box-shadow: 0 4px 12px rgba(8, 122, 59, 0.2);" onclick="app.sendLoginOtp()">
+            Send OTP
+          </button>
+          
+          <p style="font-size: 12px; color: #64748b; margin-top: 18px; text-align: center; line-height: 1.5; font-weight: 500;">
+            Worker, Employer, Contractor aur Boutique owner sab join kar sakte hain.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script src="./script.js"></script>
+</body>
+</html>
