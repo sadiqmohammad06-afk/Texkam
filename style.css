@@ -380,4 +380,352 @@ button { cursor: pointer; border: none; outline: none; background: transparent; 
 .pb-safe { padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
 .upload-placeholder { width: 100%; border: 2px dashed var(--gray-border); border-radius: 12px; height: 80px; background: #f8fafc; cursor: pointer; }
 .flex-column { flex-direction: column; }
+/* === TEXKAM HOME ZOOM-OUT / COMPACT MODE === */
+/* Safe CSS-only override: no HTML/JS change */
 
+#main-header {
+  padding: 9px 13px;
+}
+
+.header-left {
+  gap: 10px;
+}
+
+.menu-btn-round {
+  width: 38px;
+  height: 38px;
+}
+
+.menu-btn-round i {
+  width: 21px;
+  height: 21px;
+}
+
+.logo-text {
+  font-size: 22px;
+  letter-spacing: -0.4px;
+}
+
+.logo-sub,
+.loc-pin {
+  font-size: 10px;
+}
+
+.bell-icon {
+  transform: scale(0.9);
+}
+
+/* Search compact */
+.search-section {
+  padding: 10px 12px 8px;
+}
+
+.search-bar {
+  gap: 9px;
+  padding: 4px 5px 4px 6px;
+  border-width: 2px;
+  border-radius: 30px;
+}
+
+.search-icon-bg {
+  width: 38px;
+  height: 38px;
+}
+
+.search-icon-bg i {
+  width: 19px;
+  height: 19px;
+}
+
+.search-title {
+  font-size: 14px;
+}
+
+.search-hint {
+  font-size: 10px;
+}
+
+.lang-pill-search {
+  font-size: 11px;
+  padding: 6px 9px;
+}
+
+/* Categories zoom-out */
+.categories-row {
+  gap: 10px;
+  padding: 2px 12px 14px;
+}
+
+.cat-item {
+  width: 62px;
+  gap: 6px;
+}
+
+.cat-icon {
+  width: 50px;
+  height: 50px;
+  font-size: 25px !important;
+}
+
+.cat-item span {
+  font-size: 10.5px;
+  line-height: 1.15;
+}
+
+/* Action cards compact */
+.action-cards-grid {
+  gap: 10px;
+  padding: 0 12px 14px;
+}
+
+.action-card {
+  border-radius: 16px;
+  padding: 14px 12px;
+  min-height: 112px;
+}
+
+.ac-top {
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.ac-top h3 {
+  font-size: 15px;
+}
+
+.ac-top i {
+  width: 18px;
+  height: 18px;
+}
+
+.ac-sub {
+  font-size: 11.5px;
+  line-height: 1.3;
+}
+
+.ac-arrow {
+  bottom: 12px;
+  right: 12px;
+  width: 17px;
+  height: 17px;
+}
+
+/* Market Wall banner compact */
+.market-wall-banner {
+  margin: 0 12px 14px;
+  padding: 12px;
+  border-radius: 16px;
+  gap: 12px;
+}
+
+.mwb-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+}
+
+.mwb-icon i {
+  width: 20px;
+  height: 20px;
+}
+
+.mwb-content h4 {
+  font-size: 15px;
+}
+
+.mwb-content p {
+  font-size: 10.5px;
+  line-height: 1.25;
+}
+
+/* Filter chips compact */
+.filter-chips {
+  gap: 8px;
+  padding: 0 12px 14px;
+}
+
+.f-chip {
+  padding: 8px 11px;
+  border-radius: 14px;
+  font-size: 11.5px;
+}
+
+/* Section heading compact */
+.section-header {
+  padding: 0 12px 9px;
+}
+
+.section-header h3 {
+  font-size: 18px;
+}
+
+/* Job cards compact */
+.jobs-list {
+  padding: 0 12px 16px;
+}
+
+.job-card {
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.jc-content-row {
+  gap: 12px;
+}
+
+.jc-large-icon {
+  width: 62px;
+  height: 62px;
+  border-radius: 14px;
+}
+
+.jc-large-icon i {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.jc-top-meta {
+  font-size: 10.5px;
+  margin-bottom: 5px;
+}
+
+.verified-text {
+  padding: 2px 5px;
+  font-size: 10px;
+}
+
+.verified-text i {
+  width: 12px;
+  height: 12px;
+}
+
+.jc-details h4 {
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.company-name {
+  font-size: 12.5px;
+}
+
+.jc-location {
+  font-size: 11.5px;
+  margin-bottom: 7px;
+}
+
+.jc-salary {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.jc-salary .month {
+  font-size: 11px;
+}
+
+.jc-tags {
+  gap: 5px;
+}
+
+.jc-tags .tag {
+  font-size: 10.5px;
+  padding: 3px 7px;
+}
+
+.jc-actions-row {
+  gap: 8px;
+}
+
+.btn-chat-primary {
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 13.5px;
+}
+
+.btn-chat-primary i {
+  width: 16px;
+  height: 16px;
+}
+
+.jc-actions-right {
+  gap: 7px;
+}
+
+.btn-icon-outline {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+}
+
+.btn-icon-outline i {
+  width: 18px;
+  height: 18px;
+}
+
+/* Bottom nav slightly compact but same flow */
+#bottom-nav {
+  height: 64px;
+}
+
+.nav-item {
+  padding-bottom: 9px;
+  gap: 3px;
+}
+
+.nav-item i {
+  width: 23px;
+  height: 23px;
+}
+
+.nav-item span {
+  font-size: 11.5px;
+}
+
+.nav-mic-wrapper {
+  width: 68px;
+}
+
+.nav-mic-btn {
+  width: 66px;
+  height: 66px;
+  top: -30px;
+  border-width: 5px;
+}
+
+.nav-mic-btn i {
+  width: 28px;
+  height: 28px;
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  .logo-text {
+    font-size: 20px;
+  }
+
+  .cat-item {
+    width: 58px;
+  }
+
+  .cat-icon {
+    width: 46px;
+    height: 46px;
+    font-size: 23px !important;
+  }
+
+  .action-card {
+    padding: 12px 10px;
+  }
+
+  .ac-top h3 {
+    font-size: 14px;
+  }
+
+  .job-card {
+    padding: 12px;
+  }
+
+  .jc-large-icon {
+    width: 56px;
+    height: 56px;
+  }
+             }
