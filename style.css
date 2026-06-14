@@ -729,3 +729,44 @@ button { cursor: pointer; border: none; outline: none; background: transparent; 
     height: 56px;
   }
              }
+/* === TEXKAM REAL HOME ZOOM-OUT PATCH === */
+/* Home page ko actual zoom-out feel deta hai */
+
+#view-home {
+  transform: scale(0.92);
+  transform-origin: top center;
+  width: 108.7%;
+  margin-left: -4.35%;
+  padding-bottom: 40px;
+}
+
+#view-home .search-section {
+  padding-top: 8px !important;
+  padding-bottom: 6px !important;
+}
+
+#view-home .categories-row {
+  padding-bottom: 10px !important;
+}
+
+#view-home .action-cards-grid {
+  padding-bottom: 10px !important;
+}
+
+#view-home .market-wall-banner {
+  margin-bottom: 10px !important;
+}
+
+#view-home .job-card {
+  margin-top: 8px !important;
+}
+
+/* Mobile chrome zoom fallback */
+@supports (zoom: 0.92) {
+  #view-home {
+    zoom: 0.92;
+    transform: none;
+    width: 100%;
+    margin-left: 0;
+  }
+}
