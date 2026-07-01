@@ -1,0 +1,129 @@
+/* TexKam Home UI Patch - Step 1: compact category/top area
+   This file is prepared for the first UI update. It will be linked after approval/checking. */
+
+:root {
+  --tk-primary: #087a3b;
+  --tk-navy: #071f64;
+  --tk-soft: #f6faf8;
+  --tk-border: #dbe7df;
+}
+
+/* Compact top category strip */
+#view-home .categories-row {
+  gap: 10px !important;
+  padding: 6px 14px 14px !important;
+  align-items: stretch !important;
+}
+
+#view-home .cat-item {
+  min-width: 76px !important;
+  width: 76px !important;
+  border: 1px solid var(--tk-border) !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  padding: 9px 7px !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.045) !important;
+}
+
+#view-home .cat-item.active,
+#view-home .cat-item:active {
+  border-color: var(--tk-primary) !important;
+  background: #eefaf2 !important;
+}
+
+#view-home .cat-icon {
+  width: 42px !important;
+  height: 42px !important;
+  margin: 0 auto 6px !important;
+  border-radius: 14px !important;
+  font-size: 21px !important;
+}
+
+#view-home .cat-label,
+#view-home .cat-item span,
+#view-home .cat-item p {
+  font-size: 11.5px !important;
+  line-height: 1.15 !important;
+  font-weight: 750 !important;
+  color: var(--tk-navy) !important;
+  letter-spacing: -0.15px !important;
+}
+
+/* Subcategory chips: compact mobile-app style */
+#subcat-container {
+  padding: 0 14px 12px !important;
+}
+
+#subcat-title {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: var(--tk-navy) !important;
+  margin: 0 0 8px !important;
+}
+
+#subcat-chips {
+  gap: 8px !important;
+  overflow-x: auto !important;
+  padding-bottom: 2px !important;
+}
+
+#subcat-chips button,
+#subcat-chips .chip,
+.subcat-chip {
+  border-radius: 999px !important;
+  padding: 8px 12px !important;
+  font-size: 12px !important;
+  font-weight: 750 !important;
+  border: 1px solid #cfdbe6 !important;
+  background: #fff !important;
+  color: var(--tk-navy) !important;
+  white-space: nowrap !important;
+}
+
+#subcat-chips button.active,
+#subcat-chips .chip.active,
+.subcat-chip.active {
+  background: var(--tk-primary) !important;
+  border-color: var(--tk-primary) !important;
+  color: #fff !important;
+}
+
+/* Reduce zoom-heavy feel on Home top */
+#view-home .search-section {
+  padding: 12px 14px 8px !important;
+}
+
+#view-home .search-bar {
+  min-height: 58px !important;
+  border-radius: 18px !important;
+}
+
+#view-home .search-title {
+  font-size: 15px !important;
+  font-weight: 750 !important;
+}
+
+#view-home .search-hint {
+  font-size: 12px !important;
+}
+
+#view-home .action-cards-grid {
+  gap: 12px !important;
+  padding: 0 14px 12px !important;
+}
+
+#view-home .action-card {
+  min-height: 118px !important;
+  border-radius: 18px !important;
+}
+
+#view-home .ac-top h3 {
+  font-size: 18px !important;
+  line-height: 1.1 !important;
+}
+
+#view-home .ac-top p,
+#view-home .action-card p {
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+}
