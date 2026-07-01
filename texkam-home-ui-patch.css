@@ -1,85 +1,163 @@
-/* TexKam Home UI Patch - Step 1: compact category/top area
-   This file is prepared for the first UI update. It will be linked after approval/checking. */
-
+/* TexKam Home UI Patch - Step 1 refined: cleaner, lighter, less over-designed */
 :root {
   --tk-primary: #087a3b;
   --tk-navy: #071f64;
-  --tk-soft: #f6faf8;
-  --tk-border: #dbe7df;
+  --tk-soft: #f7faf9;
+  --tk-border: #e4eaf0;
+  --tk-muted: #64748b;
 }
 
-/* Compact top category strip */
-#view-home .categories-row {
+/* Overall home: less zoomed */
+#view-home {
+  transform: none !important;
+  zoom: 1 !important;
+  padding-top: 0 !important;
+}
+
+/* Header: TEXKAM too big tha, ab compact */
+#main-header {
+  padding: 10px 14px !important;
+  min-height: 76px !important;
+}
+#main-header .header-left {
   gap: 10px !important;
+}
+#main-header .menu-btn-round {
+  width: 38px !important;
+  height: 38px !important;
+}
+#main-header .menu-btn-round i {
+  width: 22px !important;
+  height: 22px !important;
+}
+#main-header .logo-text {
+  font-size: 22px !important;
+  letter-spacing: -0.4px !important;
+  line-height: 1 !important;
+}
+#main-header .logo-sub {
+  font-size: 10px !important;
+  margin-top: 3px !important;
+  line-height: 1.1 !important;
+}
+#main-header .loc-pin {
+  font-size: 10px !important;
+  margin-top: 3px !important;
+}
+#main-header .bell-icon {
+  width: 36px !important;
+  height: 36px !important;
+  padding: 7px !important;
+}
+#login-header-btn {
+  height: 32px !important;
+  padding: 6px 12px !important;
+  font-size: 12.5px !important;
+}
+
+/* Search bar: heavy border removed */
+#view-home .search-section {
+  padding: 12px 14px 10px !important;
+}
+#view-home .search-bar {
+  min-height: 56px !important;
+  border: 1.5px solid #d8e7de !important;
+  border-radius: 18px !important;
+  padding: 9px 12px !important;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04) !important;
+}
+#view-home .search-icon-bg {
+  width: 38px !important;
+  height: 38px !important;
+  background: #edf8f2 !important;
+}
+#view-home .search-title {
+  font-size: 15px !important;
+  font-weight: 760 !important;
+  color: var(--tk-navy) !important;
+}
+#view-home .search-hint {
+  font-size: 12px !important;
+  color: var(--tk-muted) !important;
+}
+#view-home .lang-pill-search {
+  padding: 7px 10px !important;
+  border: 1px solid #cfe6d8 !important;
+  font-size: 12px !important;
+  background: #fff !important;
+}
+
+/* Category strip: border over lag raha tha, ab softer app tiles */
+#view-home .categories-row {
+  gap: 12px !important;
   padding: 6px 14px 14px !important;
   align-items: stretch !important;
 }
-
 #view-home .cat-item {
   min-width: 76px !important;
   width: 76px !important;
   border: 1px solid var(--tk-border) !important;
-  border-radius: 16px !important;
+  border-radius: 18px !important;
   background: #fff !important;
-  padding: 9px 7px !important;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.045) !important;
+  padding: 9px 7px 10px !important;
+  box-shadow: 0 5px 14px rgba(15, 23, 42, 0.05) !important;
+  gap: 7px !important;
 }
-
 #view-home .cat-item.active,
 #view-home .cat-item:active {
-  border-color: var(--tk-primary) !important;
-  background: #eefaf2 !important;
+  border-color: #b9dcc8 !important;
+  background: #f6fbf8 !important;
 }
-
 #view-home .cat-icon {
-  width: 42px !important;
-  height: 42px !important;
-  margin: 0 auto 6px !important;
+  width: 43px !important;
+  height: 43px !important;
+  margin: 0 auto 4px !important;
   border-radius: 14px !important;
-  font-size: 21px !important;
+  font-size: 20px !important;
+  box-shadow: none !important;
 }
-
 #view-home .cat-label,
 #view-home .cat-item span,
 #view-home .cat-item p {
   font-size: 11.5px !important;
-  line-height: 1.15 !important;
-  font-weight: 750 !important;
+  line-height: 1.12 !important;
+  font-weight: 760 !important;
   color: var(--tk-navy) !important;
   letter-spacing: -0.15px !important;
 }
 
-/* Subcategory chips: compact mobile-app style */
+/* Subcategories: still open, but cleaner and less bulky */
 #subcat-container {
-  padding: 0 14px 12px !important;
+  padding: 6px 14px 14px !important;
+  background: #fff !important;
+  border-top: 1px solid #eef2f6 !important;
+  border-bottom: 1px solid #eef2f6 !important;
 }
-
+#subcat-container > div:first-child,
 #subcat-title {
   font-size: 14px !important;
   font-weight: 800 !important;
   color: var(--tk-navy) !important;
-  margin: 0 0 8px !important;
+  margin: 0 0 10px !important;
 }
-
-#subcat-chips {
+#subcat-chips,
+.subcat-chips {
   gap: 8px !important;
-  overflow-x: auto !important;
-  padding-bottom: 2px !important;
 }
-
 #subcat-chips button,
 #subcat-chips .chip,
-.subcat-chip {
+.subcat-chip,
+#subcat-container button {
   border-radius: 999px !important;
-  padding: 8px 12px !important;
+  padding: 7px 11px !important;
   font-size: 12px !important;
-  font-weight: 750 !important;
-  border: 1px solid #cfdbe6 !important;
+  font-weight: 720 !important;
+  border: 1px solid #dce4ec !important;
   background: #fff !important;
   color: var(--tk-navy) !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.035) !important;
   white-space: nowrap !important;
 }
-
 #subcat-chips button.active,
 #subcat-chips .chip.active,
 .subcat-chip.active {
@@ -88,42 +166,52 @@
   color: #fff !important;
 }
 
-/* Reduce zoom-heavy feel on Home top */
-#view-home .search-section {
-  padding: 12px 14px 8px !important;
-}
-
-#view-home .search-bar {
-  min-height: 58px !important;
-  border-radius: 18px !important;
-}
-
-#view-home .search-title {
-  font-size: 15px !important;
-  font-weight: 750 !important;
-}
-
-#view-home .search-hint {
-  font-size: 12px !important;
-}
-
+/* Main action cards: border and size toned down */
 #view-home .action-cards-grid {
   gap: 12px !important;
-  padding: 0 14px 12px !important;
+  padding: 14px 14px 12px !important;
 }
-
 #view-home .action-card {
-  min-height: 118px !important;
+  min-height: 106px !important;
   border-radius: 18px !important;
+  border-width: 1.5px !important;
+  box-shadow: 0 5px 16px rgba(15, 23, 42, 0.045) !important;
+  padding: 16px 14px !important;
 }
-
-#view-home .ac-top h3 {
-  font-size: 18px !important;
+#view-home .ac-top h3,
+#view-home .action-card h3 {
+  font-size: 17px !important;
   line-height: 1.1 !important;
 }
-
 #view-home .ac-top p,
 #view-home .action-card p {
-  font-size: 13px !important;
+  font-size: 12.5px !important;
   line-height: 1.35 !important;
+}
+
+/* Market card and filter chips lighter */
+#view-home .market-wall-card,
+#view-home .market-banner {
+  border-width: 1.5px !important;
+  border-radius: 18px !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.035) !important;
+}
+#view-home .filter-chips button,
+#view-home .filter-chip {
+  border-width: 1px !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
+}
+
+/* Bottom mic is distracting for MVP; keep layout clean */
+.nav-mic-wrapper,
+.nav-mic-btn {
+  display: none !important;
+}
+#bottom-nav {
+  align-items: center !important;
+  height: 68px !important;
+}
+.nav-item {
+  justify-content: center !important;
+  padding-bottom: 0 !important;
 }
