@@ -1,3 +1,3 @@
-/* Loading original TexKam styles, then Step 1 home UI patch */
-@import './style-base.css';
-@import './texkam-home-ui-patch.css';
+/* TexKam styles cache v2 */
+@import './style-base.css?v=2';
+@import './texkam-home-ui-patch.css?v=2';
